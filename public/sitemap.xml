@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Sustituir example.com por el dominio del ejercicio antes de publicar. -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://example.com/es</loc></url>
+  <url><loc>https://example.com/es/quienessomos</loc></url>
+  <url><loc>https://example.com/es/contacto</loc></url>
+  <url><loc>https://example.com/es/nuestras-hamburguesas</loc></url>
+  <url><loc>https://example.com/es/servicio1</loc></url>
+  <url><loc>https://example.com/es/servicio2</loc></url>
+  <url><loc>https://example.com/eu</loc></url>
+  <url><loc>https://example.com/eu/quienessomos</loc></url>
+  <url><loc>https://example.com/eu/contacto</loc></url>
+  <url><loc>https://example.com/eu/gure-hanburgesak</loc></url>
+  <url><loc>https://example.com/eu/servicio1</loc></url>
+  <url><loc>https://example.com/eu/servicio2</loc></url>
+</urlset>

@@ -1,0 +1,51 @@
+@use "western" as w;
+
+// artEvento01: tarjeta oscura con borde para ofrecer un servicio: título,
+// texto, lista con estrellas y una llamada a la acción (moduloBoton03).
+
+.artEvento01 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    padding: clamp(1.8rem, 4vw, 2.5rem);
+    border: 1px solid w.$fondoBorde;
+    background-color: #1c1411;
+
+    &__titulo {
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.5rem, 4.5vw, 1.9rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1.1;
+        text-transform: uppercase;
+    }
+
+    &__texto {
+        color: w.$cremaApagado;
+        font-family: w.$fuenteTexto;
+        line-height: 1.6;
+    }
+
+    &__lista {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin-bottom: 1rem;
+        list-style: none;
+
+        > li {
+            color: w.$crema;
+            font-family: w.$fuenteTexto;
+
+            &::before {
+                content: "★";
+                margin-right: 0.7rem;
+                color: w.$rojo;
+            }
+        }
+    }
+}

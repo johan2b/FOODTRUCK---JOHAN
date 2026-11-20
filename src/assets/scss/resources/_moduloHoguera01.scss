@@ -1,0 +1,164 @@
+@use "sass:math";
+
+// moduloHoguera01
+// Hoguera por capas sobre un lienzo de 140 x 120. Cada llama es una gota (un
+// cuadrado con tres esquinas redondeadas) girada -45deg para dejar la punta
+// arriba y estirada en vertical; un giro previo la inclina.
+
+$lienzoAncho: 140;
+$lienzoAlto: 120;
+
+$silueta: #140e0c;
+$resplandor: #f6965a;
+$chispa: #f2a04a;
+$fuegoClaro: #fcd56c;
+$fuegoOscuro: #f4a93a;
+
+// Coloca una capa a partir de sus coordenadas en el lienzo (x1, y1) - (x2, y2).
+@mixin capa($x1, $y1, $x2, $y2) {
+    left: math.percentage(math.div($x1, $lienzoAncho));
+    top: math.percentage(math.div($y1, $lienzoAlto));
+    width: math.percentage(math.div($x2 - $x1, $lienzoAncho));
+    height: math.percentage(math.div($y2 - $y1, $lienzoAlto));
+}
+
+.moduloHoguera01 {
+    position: relative;
+    width: 100%;
+    max-width: 140px;
+    aspect-ratio: #{$lienzoAncho} / #{$lienzoAlto};
+
+    > * {
+        position: absolute;
+    }
+
+    &__resplandor {
+        @include capa(12, 3, 128, 119);
+        border-radius: 50%;
+        background: radial-gradient(
+            circle closest-side,
+            rgba($resplandor, 0.95),
+            rgba($resplandor, 0.45) 55%,
+            transparent 100%
+        );
+    }
+
+    &__chispa {
+        @include capa(52, 14, 56, 18);
+        border-radius: 50%;
+        background-color: $chispa;
+
+        &--derecha {
+            @include capa(88, 8, 92, 12);
+        }
+    }
+
+    // Llama principal: punta alta, ligeramente inclinada a la izquierda.
+    &__llama {
+        @include capa(62, 44, 90, 72);
+        border-radius: 50% 0 50% 50%;
+        background-color: $silueta;
+        transform: rotate(-5deg) scale(0.81, 1.82) rotate(-45deg);
+
+        &--lateral {
+            @include capa(49, 56, 71, 78);
+            transform: rotate(-12deg) scale(0.77, 1.74) rotate(-45deg);
+        }
+
+        &--interior {
+            @include capa(63, 71, 77, 85);
+            background: radial-gradient(circle at 60% 60%, $fuegoClaro, $fuegoOscuro);
+            transform: scale(0.91, 1.41) rotate(-45deg);
+        }
+    }
+
+    &__tronco {
+        @include capa(26, 92, 114, 101);
+        border-radius: 999px;
+        background-color: $silueta;
+        transform: rotate(15deg);
+
+        &--cruzado {
+            transform: rotate(-15deg);
+        }
+    }
+
+    &__piedra {
+        @include capa(13, 100, 33, 112);
+        border-radius: 50%;
+        background-color: $silueta;
+
+        &--derecha {
+            @include capa(107, 100, 127, 112);
+        }
+    }
+}
+
+// Efectos: las llamas tiemblan, el resplandor late y las chispas suben.
+// Se usan scale/translate individuales para no pisar el transform de cada pieza.
+@media (prefers-reduced-motion: no-preference) {
+    .moduloHoguera01 {
+        &__llama {
+            animation: moduloHoguera01-llama 1.4s ease-in-out infinite alternate;
+
+            &--lateral {
+                animation-duration: 1.1s;
+                animation-delay: -0.4s;
+            }
+
+            &--interior {
+                animation-duration: 0.8s;
+            }
+        }
+
+        &__resplandor {
+            animation: moduloHoguera01-resplandor 2.2s ease-in-out infinite alternate;
+        }
+
+        &__chispa {
+            animation: moduloHoguera01-chispa 2.4s ease-out infinite;
+
+            &--derecha {
+                animation-delay: -1.2s;
+            }
+        }
+    }
+}
+
+@keyframes moduloHoguera01-llama {
+    from {
+        scale: 1 1;
+    }
+
+    to {
+        scale: 0.94 1.08;
+    }
+}
+
+@keyframes moduloHoguera01-resplandor {
+    from {
+        opacity: 0.8;
+        scale: 0.95;
+    }
+
+    to {
+        opacity: 1;
+        scale: 1.05;
+    }
+}
+
+@keyframes moduloHoguera01-chispa {
+    0% {
+        opacity: 0;
+        translate: 0 1.5rem;
+    }
+
+    30% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+        translate: 0.4rem -1rem;
+    }
+}

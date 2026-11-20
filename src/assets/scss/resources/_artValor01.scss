@@ -1,0 +1,89 @@
+@use "config" as c;
+@use "western" as w;
+
+// artValor01
+// Tarjeta oscura para destacar un valor o característica: icono circular,
+// numeral romano decorativo, título y texto. Pensada para repetirse en
+// grupo dentro de .artValor01-grupo.
+
+.artValor01-grupo {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
+    gap: c.$padMin;
+    width: 100%;
+    max-width: c.$desktop;
+    padding-inline: c.$padMin;
+}
+
+.artValor01 {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin-inline: auto;
+    padding: 2.5rem 2.1rem;
+    background-color: w.$fondo;
+
+    &__icono {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        aspect-ratio: 1;
+        border: 2px solid w.$rojo;
+        border-radius: 50%;
+        font-size: 1.6rem;
+        line-height: 1;
+        color: w.$rojo;
+    }
+
+    &__numeral {
+        position: absolute;
+        top: 3.1rem;
+        right: 2.1rem;
+        font-family: w.$fuenteTitulo;
+        font-size: 2.6rem;
+        line-height: 1;
+        color: w.$rojo;
+    }
+
+    &__titulo {
+        margin-top: 1.6rem;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.2rem, 5vw, 1.35rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        color: w.$crema;
+        text-transform: uppercase;
+    }
+
+    &__texto {
+        margin-top: 0.9rem;
+        font-family: w.$fuenteTexto;
+        color: w.$cremaApagado;
+    }
+}
+
+// Efectos: la tarjeta sube y el icono gira al pasar el ratón.
+@media (prefers-reduced-motion: no-preference) {
+    .artValor01 {
+        transition: translate 300ms ease;
+
+        &__icono {
+            transition:
+                rotate 400ms ease,
+                background-color 300ms ease,
+                color 300ms ease;
+        }
+
+        &:hover {
+            translate: 0 -4px;
+        }
+
+        &:hover &__icono {
+            rotate: 20deg;
+            background-color: w.$rojo;
+            color: w.$crema;
+        }
+    }
+}

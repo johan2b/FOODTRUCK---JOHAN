@@ -1,0 +1,92 @@
+@use "western" as w;
+
+// moduloBoton03
+// Enlace con aspecto de botón, en mayúsculas espaciadas y estilo western.
+// - .moduloBoton03: relleno rojo con texto crema.
+// - .moduloBoton03--oscuro: relleno oscuro con texto crema, para fondos rojos.
+// - .moduloBoton03--contorno: borde y texto crema, pensado para fondos oscuros.
+// Es un <a>: navega a otra página. Para acciones, usar un <button>.
+
+.moduloBoton03 {
+    display: inline-block;
+    padding: 0.85rem 1.7rem;
+    border: 2px solid w.$rojo;
+    background-color: w.$rojo;
+    font-family: w.$fuenteTexto;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    color: w.$crema;
+    text-align: center;
+    text-transform: uppercase;
+    transition:
+        background-color 0.3s,
+        border-color 0.3s,
+        color 0.3s;
+
+    &:hover {
+        border-color: w.$rojoHover;
+        background-color: w.$rojoHover;
+    }
+
+    &:focus-visible {
+        outline: 3px solid w.$crema;
+        outline-offset: 3px;
+    }
+
+    // Para fondos rojos.
+    &--oscuro {
+        border-color: w.$fondo;
+        background-color: w.$fondo;
+
+        &:hover {
+            border-color: #2d211c;
+            background-color: #2d211c;
+        }
+    }
+
+    &--contorno {
+        border-color: w.$crema;
+        background-color: transparent;
+
+        &:hover {
+            border-color: w.$crema;
+            background-color: w.$crema;
+            color: w.$tinta;
+        }
+    }
+}
+
+// Franja oscura para mostrar las dos variantes juntas en el catálogo.
+.moduloBoton03-grupo {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    background-color: w.$fondo;
+
+    &--rojo {
+        background-color: w.$rojo;
+    }
+}
+
+// Efectos: el botón sube un poco al pasar el ratón.
+@media (prefers-reduced-motion: no-preference) {
+    .moduloBoton03 {
+        transition:
+            background-color 0.3s,
+            border-color 0.3s,
+            color 0.3s,
+            translate 0.2s ease;
+
+        &:hover {
+            translate: 0 -2px;
+        }
+
+        &:active {
+            translate: 0 1px;
+        }
+    }
+}

@@ -1,0 +1,36 @@
+@use "western" as w;
+
+// h2Especial-bis: variante western del antetítulo con raya de .h2Especial.
+// Aquí la raya acompaña a un antetítulo (<p>) situado sobre el H2, en lugar
+// de al propio H2, y puede ir a uno o a los dos lados. .h2Especial no cambia.
+// - Por defecto: texto y rayas rojos (fondos oscuros).
+// - --oscuro: texto y rayas en tinta (fondos rojos o claros).
+
+.h2Especial-bis {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: w.$rojo;
+    font-family: w.$fuenteTitulo;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    line-height: 1.2;
+    text-transform: uppercase;
+
+    // El estilo global de span impone otro color y otra fuente.
+    > span {
+        color: inherit;
+        font-family: inherit;
+    }
+
+    &__raya {
+        flex: 0 0 auto;
+        width: clamp(1.25rem, 6vw, 3.5rem);
+        height: 2px;
+        background-color: currentColor;
+    }
+
+    &--oscuro {
+        color: w.$tinta;
+    }
+}

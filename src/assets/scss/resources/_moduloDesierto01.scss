@@ -1,0 +1,117 @@
+@use "sass:math";
+
+// moduloDesierto01
+// Paisaje de desierto al atardecer por capas sobre un lienzo de 1440 x 300.
+// Las capas se posicionan con porcentajes, así que el paisaje escala con el
+// ancho del módulo. El orden del HTML decide qué capa queda encima.
+
+$lienzoAncho: 1440;
+$lienzoAlto: 300;
+
+$cieloAlto: #5a0f0c;
+$cieloBajo: #c42f22;
+$sol: #d6532f;
+$mesa: #4e0f0c;
+$silueta: #140e0c;
+$asfalto: #120d0b;
+$linea: #8f8a7a;
+
+// Coloca una capa a partir de sus coordenadas en el lienzo (x1, y1) - (x2, y2).
+@mixin capa($x1, $y1, $x2, $y2) {
+    left: math.percentage(math.div($x1, $lienzoAncho));
+    top: math.percentage(math.div($y1, $lienzoAlto));
+    width: math.percentage(math.div($x2 - $x1, $lienzoAncho));
+    height: math.percentage(math.div($y2 - $y1, $lienzoAlto));
+}
+
+.moduloDesierto01 {
+    position: relative;
+    width: 100%;
+    aspect-ratio: #{$lienzoAncho} / #{$lienzoAlto};
+    overflow: hidden;
+    background: linear-gradient($cieloAlto, $cieloBajo 75%);
+
+    > * {
+        position: absolute;
+    }
+
+    &__sol {
+        @include capa(835, 120, 1035, 320);
+        border-radius: 50%;
+        background-color: $sol;
+    }
+
+    // Meseta: trapecio. La sombra deja intuir el sol detrás.
+    &__mesa {
+        @include capa(82, 170, 258, 226);
+        background-color: $mesa;
+        opacity: 0.92;
+        clip-path: polygon(16% 0, 84% 0, 100% 100%, 0 100%);
+
+        &--baja {
+            @include capa(522, 190, 667, 226);
+            clip-path: polygon(15% 0, 81% 0, 100% 100%, 0 100%);
+        }
+
+        &--alta {
+            @include capa(982, 150, 1188, 226);
+            clip-path: polygon(14% 0, 82% 0, 100% 100%, 0 100%);
+        }
+    }
+
+    // Cactus: el elemento es el tronco y los pseudoelementos, los brazos.
+    &__cactus {
+        @include capa(34, 164, 46, 226);
+        border-radius: 999px 999px 0 0;
+        background-color: $silueta;
+
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            width: 80%;
+            border-radius: 999px;
+            background-color: $silueta;
+        }
+
+        &::before {
+            top: 20%;
+            right: 100%;
+            height: 45%;
+        }
+
+        &::after {
+            top: 32%;
+            left: 100%;
+            height: 38%;
+        }
+
+        &--alto {
+            @include capa(323, 148, 337, 226);
+        }
+
+        &--pequeno {
+            @include capa(755, 172, 765, 226);
+        }
+
+        &--sol {
+            @include capa(899, 156, 911, 226);
+        }
+    }
+
+    &__carretera {
+        @include capa(0, 226, 1440, 300);
+        background-color: $asfalto;
+    }
+
+    // Línea discontinua: trazo de 34 y hueco de 26 sobre un periodo de 60.
+    &__linea {
+        @include capa(0, 264, 1440, 268);
+        background: repeating-linear-gradient(
+            90deg,
+            $linea 0 1.18%,
+            transparent 1.18% 2.99%,
+            $linea 2.99% 4.1667%
+        );
+    }
+}

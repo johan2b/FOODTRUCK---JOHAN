@@ -1,0 +1,29 @@
+@use "./resources/config" as c;
+@use "./resources/global";
+@use "./resources/western" as w;
+
+// Navegación y pie
+@use "./resources/nav02";
+@use "./resources/footer02";
+
+// Cabecera
+@use "./resources/header01-bis";
+@use "./resources/h2Especial-bis";
+
+// Historia y su escena
+@use "./resources/artHistoria01";
+@use "./resources/moduloDesierto01";
+@use "./resources/moduloFoodtruck01";
+@use "./resources/moduloHoguera01";
+@use "./resources/moduloGrupo01";
+
+// Carrito (botón flotante y panel)
+@use "./resources/moduloBoton03";
+@use "./resources/moduloCarrito01";
+
+// Aparición al hacer scroll: el último, para que su transition gane mientras dura.
+@use "./resources/moduloAnimar01";
+
+body {
+    background-color: w.$fondo;
+}

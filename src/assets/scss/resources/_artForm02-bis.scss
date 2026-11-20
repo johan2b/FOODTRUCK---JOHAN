@@ -1,0 +1,320 @@
+@use "config" as c;
+@use "western" as w;
+
+// artForm02-bis: variante western ("telegrama") de artForm02. Conserva los IDs
+// y nombres de campo que usan _artForm02.js y App/app/artForm02.php
+// (#idForAjax, #errorForm02, #modal_envio, #moduloLoader01, captcha...), de
+// modo que el comportamiento es el mismo. artForm02 no cambia.
+// Añade dos campos opcionales: fecha_evento y motivo (radios en forma de chip).
+
+.artForm02-bis {
+    position: relative;
+    width: 100%;
+    padding: clamp(2rem, 5vw, 3rem);
+    background-color: w.$crema;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.45);
+
+    &__cabecera {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        padding-bottom: 1rem;
+        border-bottom: 3px solid w.$tinta;
+    }
+
+    &__titulo {
+        margin: 0;
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.9rem, 6vw, 2.6rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    // Sello decorativo
+    &__sello {
+        padding: 0.35rem 0.9rem;
+        border: 3px solid w.$rojo;
+        color: w.$rojo;
+        font-family: w.$fuenteTitulo;
+        font-size: 1rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        transform: rotate(-6deg);
+    }
+
+    // El <form> es flex: _artForm02.js le vuelve a poner display: flex al
+    // escribir otro mensaje. La rejilla de campos va en __rejilla.
+    &__formulario {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    &__rejilla {
+        display: grid;
+        gap: 1.5rem;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__campo {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        min-width: 0;
+        border: 0;
+
+        &--ancho {
+            grid-column: 1 / -1;
+        }
+
+        // El <legend> no participa del gap del fieldset.
+        > legend {
+            margin-bottom: 0.6rem;
+        }
+    }
+
+    &__etiqueta {
+        padding: 0;
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+
+    &__control {
+        width: 100%;
+        padding: 0.4rem 0 0.6rem;
+        border: 0;
+        border-bottom: 2px solid w.$tinta;
+        border-radius: 0;
+        background-color: transparent;
+        color: w.$tinta;
+        font-family: w.$fuenteMono;
+        font-size: 0.95rem;
+
+        &::placeholder {
+            color: w.$tintaSuave;
+            opacity: 0.8;
+        }
+
+        &:focus-visible {
+            outline: 3px solid rgba(w.$rojo, 0.5);
+            outline-offset: 3px;
+        }
+
+        &--area {
+            min-height: 8rem;
+            padding: 0.9rem 1rem;
+            border: 2px solid w.$tinta;
+            resize: vertical;
+        }
+
+        &--corto {
+            width: 6rem;
+        }
+    }
+
+    // Motivo: radios ocultos visualmente con la etiqueta como chip.
+    &__chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+    }
+
+    &__chip {
+        position: relative;
+
+        > input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        > span {
+            display: inline-block;
+            padding: 0.45rem 0.9rem;
+            border: 2px solid w.$tinta;
+            color: w.$tinta;
+            font-family: w.$fuenteTexto;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition:
+                background-color 200ms ease,
+                color 200ms ease;
+        }
+
+        > input:checked + span {
+            background-color: w.$tinta;
+            color: w.$crema;
+        }
+
+        > input:focus-visible + span {
+            outline: 3px solid w.$rojo;
+            outline-offset: 2px;
+        }
+    }
+
+    // Resumen del pedido para llevar (lo rellena moduloCarrito01).
+    &__pedido {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        padding: 1rem 1.2rem;
+        border: 2px dashed w.$rojo;
+
+        &[hidden] {
+            display: none;
+        }
+    }
+
+    &__pedidoLista {
+        display: flex;
+        flex-direction: column;
+        gap: 0.3rem;
+        list-style: none;
+
+        > li {
+            color: w.$tinta;
+            font-family: w.$fuenteMono;
+            font-size: 0.9rem;
+        }
+    }
+
+    &__pedidoTotal {
+        color: w.$tinta;
+        font-family: w.$fuenteTexto;
+        font-weight: 600;
+
+        > strong {
+            color: w.$rojoClaro;
+            font-family: w.$fuenteTitulo;
+            font-weight: 400;
+        }
+    }
+
+    // Consentimiento y comprobación: obligatorios para el controlador.
+    &__linea {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.6rem;
+        color: w.$tinta;
+        font-family: w.$fuenteTexto;
+        font-size: 0.9rem;
+
+        > span,
+        > label {
+            color: inherit;
+            font-family: inherit;
+        }
+
+        > input[type="checkbox"] {
+            flex: 0 0 auto;
+            width: 1.2rem;
+            height: 1.2rem;
+            accent-color: w.$rojo;
+        }
+
+        // El texto del consentimiento se queda junto a su casilla.
+        > input[type="checkbox"] + label {
+            flex: 1 1 0;
+        }
+    }
+
+    &__operacion {
+        font-family: w.$fuenteMono;
+        font-size: 1.1rem;
+    }
+
+    &__error {
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-weight: 600;
+
+        &:empty {
+            display: none;
+        }
+    }
+
+    &__enviar {
+        align-self: flex-start;
+        padding: 1rem 1.6rem;
+        border: 0;
+        background-color: w.$rojo;
+        color: w.$crema;
+        font-family: w.$fuenteTexto;
+        font-size: 0.85rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 200ms ease;
+
+        &:hover {
+            background-color: w.$rojoHover;
+        }
+
+        &:focus-visible {
+            outline: 3px solid w.$tinta;
+            outline-offset: 3px;
+        }
+    }
+
+    // Panel de confirmación: _artForm02.js lo muestra con display: flex.
+    #modal_envio {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+        margin-top: 1.5rem;
+    }
+
+    &__enviadoTitulo {
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: 1.4rem;
+        font-weight: 400;
+        letter-spacing: 0.02em;
+    }
+
+    &__enviadoTexto {
+        color: w.$tintaSuave;
+        font-family: w.$fuenteTexto;
+    }
+
+    &__otro {
+        padding: 0.8rem 1.3rem;
+        background-color: w.$tinta;
+        color: w.$crema;
+        font-family: w.$fuenteTexto;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        cursor: pointer;
+
+        &:focus-visible {
+            outline: 3px solid w.$rojo;
+            outline-offset: 3px;
+        }
+    }
+
+    // El loader se centra sobre el formulario mientras se envía.
+    .moduloLoader01 {
+        color: w.$rojo;
+        filter: none;
+    }
+}

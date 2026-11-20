@@ -1,0 +1,189 @@
+@use "config" as c;
+@use "western" as w;
+
+// moduloMapa01: mapa de papel cuadriculado con un camino discontinuo (SVG),
+// paradas numeradas (<ol>) y una rosa de los vientos. Cada parada se coloca
+// con las propiedades --x y --y (porcentajes de __lienzo) desde su modificador.
+// En móvil el rótulo va encima del __lienzo; desde tablet, superpuesto.
+
+$papel: #dfcda6;
+$cuadricula: rgba(#8a6f45, 0.22);
+
+.moduloMapa01 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    overflow: hidden;
+
+    @media only screen and (min-width: c.$tablet) {
+        display: block;
+        aspect-ratio: 1230 / 318;
+    }
+    border: 3px solid w.$crema;
+    background:
+        repeating-linear-gradient(90deg, $cuadricula 0 1px, transparent 1px 4.6%),
+        repeating-linear-gradient(0deg, $cuadricula 0 1px, transparent 1px 17.7%),
+        $papel;
+
+    &__rotulo {
+        z-index: 2;
+        align-self: flex-start;
+        margin: 1rem 1rem 0;
+        padding: 0.8rem 1.1rem;
+        background-color: w.$fondo;
+
+        @media only screen and (min-width: c.$tablet) {
+            position: absolute;
+            top: 11%;
+            left: 3%;
+            margin: 0;
+            padding: 1rem 1.25rem;
+        }
+    }
+
+    &__lienzo {
+        position: relative;
+        height: 16rem;
+
+        @media only screen and (min-width: c.$tablet) {
+            position: absolute;
+            inset: 0;
+            height: auto;
+        }
+    }
+
+    &__titulo {
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(0.95rem, 2.4vw, 1.2rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+    }
+
+    &__subtitulo {
+        margin-top: 0.3rem;
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+
+    &__camino {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    &__paradas {
+        list-style: none;
+    }
+
+    // Etiqueta encima y número en un círculo rojo, centrado en (--x, --y).
+    &__parada {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        transform: translate(-50%, calc(-100% + 1.1rem));
+
+        &--1 {
+            --x: 13.7%;
+            --y: 66%;
+        }
+
+        &--2 {
+            --x: 39.6%;
+            --y: 64.5%;
+        }
+
+        &--3 {
+            --x: 63.3%;
+            --y: 41%;
+        }
+
+        &--4 {
+            --x: 86.1%;
+            --y: 37.4%;
+        }
+    }
+
+    &__lugar {
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(0.6rem, 1.3vw, 0.9rem);
+        letter-spacing: 0.04em;
+        line-height: 1.2;
+        text-transform: uppercase;
+        // En móvil el nombre puede ocupar dos líneas.
+        max-width: 5rem;
+        text-align: center;
+
+        @media only screen and (min-width: c.$tablet) {
+            max-width: none;
+            white-space: nowrap;
+        }
+    }
+
+    &__numero {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.2rem;
+        aspect-ratio: 1;
+        border: 3px solid w.$tinta;
+        border-radius: 50%;
+        background-color: w.$rojo;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        font-size: 0.85rem;
+        line-height: 1;
+    }
+
+    &__brujula {
+        position: absolute;
+        right: 4%;
+        bottom: 8%;
+        width: clamp(3rem, 7vw, 5.5rem);
+        height: auto;
+    }
+}
+
+// Efectos: los números de las paradas laten, uno detrás de otro.
+@media (prefers-reduced-motion: no-preference) {
+    .moduloMapa01__numero {
+        animation: moduloMapa01-latido 2.4s ease-in-out infinite;
+    }
+
+    .moduloMapa01__parada--2 .moduloMapa01__numero {
+        animation-delay: 0.6s;
+    }
+
+    .moduloMapa01__parada--3 .moduloMapa01__numero {
+        animation-delay: 1.2s;
+    }
+
+    .moduloMapa01__parada--4 .moduloMapa01__numero {
+        animation-delay: 1.8s;
+    }
+}
+
+@keyframes moduloMapa01-latido {
+    0%,
+    70%,
+    100% {
+        scale: 1;
+    }
+
+    35% {
+        scale: 1.18;
+    }
+}

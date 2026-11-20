@@ -1,0 +1,83 @@
+@use "western" as w;
+
+// artContacto01: tarjeta roja con los datos de contacto. Cada dato es un <li>
+// con un icono circular decorativo, una etiqueta y su valor.
+
+.artContacto01 {
+    width: 100%;
+    padding: clamp(1.8rem, 4vw, 2.5rem);
+    background-color: w.$rojo;
+
+    &__titulo {
+        margin: 0 0 1rem;
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.6rem, 5vw, 2rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        text-transform: uppercase;
+    }
+
+    &__lista {
+        list-style: none;
+    }
+
+    &__item {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        align-items: center;
+        column-gap: 1rem;
+        padding: 0.9rem 0;
+        border-bottom: 1px solid rgba(w.$tinta, 0.3);
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
+
+    &__icono {
+        grid-row: span 2;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 2.75rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: w.$fondo;
+        color: w.$rojo;
+        font-size: 1rem;
+        line-height: 1;
+    }
+
+    &__etiqueta {
+        color: w.$tinta;
+        font-family: w.$fuenteTexto;
+        font-size: 0.65rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    &__valor {
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTexto;
+        font-size: 1.1rem;
+        font-weight: 600;
+    }
+
+    &__enlace {
+        color: inherit;
+        font: inherit;
+
+        &:hover {
+            text-decoration: underline;
+            text-underline-offset: 0.2em;
+        }
+
+        &:focus-visible {
+            outline: 2px solid w.$crema;
+            outline-offset: 2px;
+        }
+    }
+}

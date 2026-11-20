@@ -1,0 +1,84 @@
+@use "config" as c;
+@use "western" as w;
+
+// artRuta01: hoja de ruta semanal en papel crema, ligeramente girada. Cada
+// parada (<li>) muestra el día, el lugar y el horario; en móvil el horario
+// baja bajo el lugar.
+
+.artRuta01 {
+    justify-self: center;
+    width: 100%;
+    max-width: 32rem;
+    padding: 1.8rem 1.6rem 2rem;
+    background-color: w.$crema;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.4);
+    transform: rotate(-2deg);
+
+    &__titulo {
+        margin: 0;
+        padding-bottom: 0.6rem;
+        border-bottom: 3px solid w.$tinta;
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.2rem, 4vw, 1.4rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    &__lista {
+        list-style: none;
+    }
+
+    &__parada {
+        display: grid;
+        grid-template-columns: 4.5rem 1fr;
+        align-items: baseline;
+        gap: 0.25rem 1rem;
+        padding: 0.95rem 0;
+        border-bottom: 1px dashed #b9a98a;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-template-columns: 4.5rem 1fr auto;
+        }
+    }
+
+    &__dia {
+        color: w.$rojo;
+        font-family: w.$fuenteTitulo;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+    }
+
+    &__lugar {
+        color: w.$tinta;
+        font-family: w.$fuenteTexto;
+        font-size: 0.9rem;
+    }
+
+    &__hora {
+        grid-column: 2;
+        color: w.$tintaSuave;
+        font-family: w.$fuenteMono;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        white-space: nowrap;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-column: auto;
+            text-align: right;
+        }
+    }
+}
+
+// Efectos: la parada señalada se ilumina al pasar el ratón.
+@media (prefers-reduced-motion: no-preference) {
+    .artRuta01__parada {
+        transition: background-color 250ms ease;
+
+        &:hover {
+            background-color: rgba(w.$rojo, 0.08);
+        }
+    }
+}

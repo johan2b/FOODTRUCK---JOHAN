@@ -1,0 +1,209 @@
+@use "config" as c;
+
+// footer02: pie oscuro de estilo "western" a juego con nav02. Columna de marca
+// con descripción, tres columnas de datos y barra inferior. Mobile-first.
+
+@font-face {
+    font-family: "League Spartan";
+    // Ruta relativa a la entrada SCSS (src/assets/scss/*.scss): Vite no reescribe
+    // los url() de los parciales importados con @use.
+    src: url("../fonts/LeagueSpartan-VariableFont_wght.ttf");
+    font-weight: 100 900;
+    font-display: swap;
+}
+
+$footer02Fondo: #0d0908;
+$footer02Crema: #f1e4c8;
+$footer02Texto: #c9bca3;
+$footer02Rojo: #b5241c;
+$footer02Linea: #3a2a20;
+$footer02Fuente: "League Spartan", c.$fuenteTextos, sans-serif;
+$footer02Ancho: 1320px;
+
+.footer02 {
+    width: 100%;
+    background-color: $footer02Fondo;
+    color: $footer02Texto;
+
+    &__inner {
+        width: min(100% - 2rem, $footer02Ancho);
+        margin-inline: auto;
+        padding: 3rem 0 1.5rem;
+        @media only screen and (min-width: c.$desktop) {
+            padding-top: 3.5rem;
+        }
+    }
+
+    &__grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        padding-bottom: 2.5rem;
+        border-bottom: 1px solid $footer02Linea;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2.5rem 2rem;
+        }
+
+        @media only screen and (min-width: c.$desktop) {
+            grid-template-columns: 1.5fr repeat(3, 1fr);
+            padding-bottom: 2.75rem;
+        }
+    }
+
+    &__brandCol {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        @media only screen and (min-width: c.$tablet) {
+            grid-column: 1 / -1;
+        }
+        @media only screen and (min-width: c.$desktop) {
+            grid-column: auto;
+            padding-right: 2rem;
+        }
+    }
+
+    &__brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.85rem;
+        align-self: flex-start;
+        border-radius: 4px;
+
+        &:focus-visible {
+            outline: 2px solid $footer02Crema;
+            outline-offset: 4px;
+        }
+    }
+
+    &__logo {
+        width: 3.6rem;
+        height: 3.6rem;
+        flex: 0 0 auto;
+        color: $footer02Rojo;
+    }
+
+    &__brandText {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+    }
+
+    &__name {
+        color: $footer02Crema;
+        font-family: $footer02Fuente;
+        font-size: clamp(1.5rem, 3vw, 1.9rem);
+        font-weight: 900;
+        letter-spacing: 0.08em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__tagline {
+        color: $footer02Rojo;
+        font-family: $footer02Fuente;
+        font-size: 0.62rem;
+        font-weight: 600;
+        letter-spacing: 0.22em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    // Se fijan color y tipografía en las clases del recurso para no depender
+    // de los estilos globales de p, span o h3.
+    &__text,
+    &__line {
+        color: $footer02Texto;
+        font-family: $footer02Fuente;
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    &__text {
+        max-width: 26rem;
+    }
+
+    &__col {
+        display: flex;
+        flex-direction: column;
+        gap: 0.9rem;
+    }
+
+    &__title {
+        color: $footer02Crema;
+        font-family: $footer02Fuente;
+        font-size: 1.1rem;
+        font-weight: 900;
+        letter-spacing: 0.06em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    // Los enlaces de dentro heredan su fuente (__link usa font: inherit).
+    &__address {
+        font-family: $footer02Fuente;
+        font-size: 0.95rem;
+        font-style: normal;
+        line-height: 1.6;
+    }
+
+    &__line {
+        display: block;
+    }
+
+    &__link {
+        color: inherit;
+        font: inherit;
+        transition: color 200ms ease;
+
+        &:hover,
+        &:focus-visible {
+            color: $footer02Crema;
+            text-decoration: underline;
+            text-decoration-color: $footer02Rojo;
+            text-underline-offset: 0.2em;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $footer02Crema;
+            outline-offset: 2px;
+        }
+    }
+
+    &__bottom {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding-top: 1.5rem;
+
+        @media only screen and (min-width: c.$tablet) {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+        }
+    }
+
+    &__legal,
+    &__motto {
+        color: $footer02Texto;
+        font-family: $footer02Fuente;
+        font-size: 0.78rem;
+        letter-spacing: 0.16em;
+        line-height: 1.4;
+        text-transform: uppercase;
+    }
+
+    // Las estrellas son span: el estilo global de span impone otro color.
+    &__motto > span {
+        color: inherit;
+        font-family: inherit;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            transition: none !important;
+        }
+    }
+}

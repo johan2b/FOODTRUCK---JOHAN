@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+
+# Base de formación: permitir indexación y configurar sitemap al publicar.

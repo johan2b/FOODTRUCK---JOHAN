@@ -1,0 +1,101 @@
+@use "western" as w;
+
+// artCartel01: cartel de "Se busca" clavado y ligeramente girado, con un
+// producto enmarcado, su nombre y su precio como recompensa. El marco
+// (__marco) admite cualquier dibujo, por ejemplo moduloBurger01 --oscuro.
+
+.artCartel01 {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    width: 100%;
+    max-width: 26rem;
+    padding: 2.4rem 1.6rem 1.8rem;
+    border: 1px solid #d8c9a6;
+    background-color: w.$crema;
+    box-shadow: 0 1.5rem 3rem rgba(0, 0, 0, 0.55);
+    text-align: center;
+    transform: rotate(3deg);
+
+    // clavo
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0.9rem;
+        left: 50%;
+        width: 0.6rem;
+        aspect-ratio: 1;
+        border-radius: 50%;
+        background-color: w.$tinta;
+        transform: translateX(-50%);
+    }
+
+    &__titulo {
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.9rem, 9vw, 3.2rem);
+        letter-spacing: 0.02em;
+        line-height: 1;
+        color: w.$tinta;
+        text-transform: uppercase;
+    }
+
+    &__lema {
+        font-family: w.$fuenteTitulo;
+        font-size: 0.75rem;
+        letter-spacing: 0.25em;
+        color: w.$rojo;
+        text-transform: uppercase;
+    }
+
+    &__marco {
+        width: 100%;
+        margin-block: 0.4rem;
+        padding: 1.2rem 1rem 0.6rem;
+        border: 3px solid w.$tinta;
+        background:
+            radial-gradient(circle at 50% 45%, rgba(w.$rojo, 0.3), transparent 60%),
+            w.$fondo;
+    }
+
+    &__nombre {
+        font-family: w.$fuenteTitulo;
+        font-size: 1.5rem;
+        line-height: 1.1;
+        color: w.$tinta;
+    }
+
+    &__recompensa {
+        font-family: w.$fuenteMono;
+        font-size: 0.7rem;
+        letter-spacing: 0.3em;
+        color: w.$tintaSuave;
+        text-transform: uppercase;
+    }
+
+    &__precio {
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(2.2rem, 8vw, 2.6rem);
+        line-height: 1;
+        color: w.$rojoClaro;
+    }
+}
+
+// Efectos: el cartel se balancea colgado de su clavo.
+@media (prefers-reduced-motion: no-preference) {
+    .artCartel01 {
+        transform-origin: 50% 1.2rem;
+        animation: artCartel01-vaiven 5s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes artCartel01-vaiven {
+    from {
+        rotate: -1.2deg;
+    }
+
+    to {
+        rotate: 1.2deg;
+    }
+}

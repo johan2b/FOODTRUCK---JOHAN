@@ -1,0 +1,33 @@
+@use "./resources/config" as c;
+@use "./resources/global";
+@use "./resources/western" as w;
+
+// Navegación y pie
+@use "./resources/nav02";
+@use "./resources/footer02";
+
+// Cabecera
+@use "./resources/header01-bis";
+@use "./resources/h2Especial-bis";
+
+// Secciones
+@use "./resources/sect02-bis";
+@use "./resources/artForm02-bis";
+@use "./resources/artContacto01";
+@use "./resources/artEvento01";
+
+// Módulos
+@use "./resources/moduloLoader01";
+@use "./resources/moduloBoton03";
+@use "./resources/moduloMapa01";
+
+// Carrito (botón flotante y panel)
+@use "./resources/moduloCarrito01";
+
+// Aparición al hacer scroll: el último, para que su transition gane mientras dura.
+@use "./resources/moduloAnimar01";
+
+// Fondo de página: las diagonales de sect02-bis dejan ver el body.
+body {
+    background-color: w.$fondo;
+}

@@ -1,0 +1,35 @@
+// western: fuentes y paleta compartidas por las tarjetas de estilo western
+// (artCarta01, artProducto01, artValor01). Se carga con @use desde cada
+// parcial; Sass emite los @font-face una sola vez aunque lo usen varios.
+
+@font-face {
+    font-family: "Ultra";
+    // Ruta relativa a la entrada SCSS (src/assets/scss/*.scss): Vite no reescribe
+    // los url() de los parciales importados con @use.
+    src: url("../fonts/Ultra-Regular.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Playfair Display";
+    src: url("../fonts/PlayfairDisplay-Italic.woff2") format("woff2");
+    font-style: italic;
+    font-weight: 400;
+    font-display: swap;
+}
+
+$fuenteTitulo: "Ultra", Rockwell, Georgia, serif;
+$fuenteCursiva: "Playfair Display", Georgia, serif;
+$fuenteTexto: "Montserrat", Arial, sans-serif;
+$fuenteMono: ui-monospace, "Courier New", monospace;
+
+$fondo: #140f0d;
+$fondoBorde: #3b2b23;
+$crema: #f1e4c8;
+$cremaApagado: #b3a58c;
+$tinta: #1a1210;
+$tintaSuave: #5a4a3c;
+$rojo: #b5241c;
+$rojoClaro: #c4271f;
+$rojoHover: #d12e24;

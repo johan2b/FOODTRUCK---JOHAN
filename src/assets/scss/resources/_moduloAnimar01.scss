@@ -1,0 +1,27 @@
+// moduloAnimar01: estados de la aparición al hacer scroll (_moduloAnimar01.js).
+// Usa las propiedades individuales opacity y translate, no transform, para no
+// pisar los giros propios de recursos como artCartel01 o artRuta01.
+//
+// Importar este parcial el ÚLTIMO en la entrada de la vista: su transition debe
+// ganar mientras dura la aparición a la de los recursos animados.
+
+.moduloAnimar01 {
+    opacity: 0;
+    translate: 0 2rem;
+    transition:
+        opacity 700ms ease var(--animar-retraso, 0ms),
+        translate 700ms cubic-bezier(0.2, 0.7, 0.2, 1) var(--animar-retraso, 0ms);
+
+    &--visible {
+        opacity: 1;
+        translate: 0 0;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .moduloAnimar01 {
+        opacity: 1;
+        translate: none;
+        transition: none;
+    }
+}

@@ -1,0 +1,184 @@
+@use "config" as c;
+@use "western" as w;
+
+// sect02-bis: variante western de sect02. Conserva la idea de sección con
+// cabecera y un contenido que en escritorio se reparte en dos mitades, y añade
+// fondo rojo u oscuro, bordes en diagonal y una rejilla para tarjetas.
+// sect02 no cambia.
+//
+// Modificadores de la raíz:
+// - --rojo: fondo rojo (por defecto, oscuro).
+// - --sesgoArriba / --sesgoAbajo: borde superior o inferior en diagonal.
+// Piezas:
+// - __cabecera (--centrado, --accion), __grupo, __titulo, __texto
+// - __rejilla: tarjetas en columnas.
+// - __dividido + __columna: dos mitades en escritorio.
+
+$sesgo: clamp(2.5rem, 4.5vw, 4.5rem);
+$espacio: clamp(4rem, 8vw, 6.5rem);
+
+.sect02-bis {
+    --sesgo-arriba: 0px;
+    --sesgo-abajo: 0px;
+
+    position: relative;
+    padding: calc(#{$espacio} + var(--sesgo-arriba)) 0 calc(#{$espacio} + var(--sesgo-abajo));
+    background-color: w.$fondo;
+    clip-path: polygon(0 var(--sesgo-arriba), 100% 0, 100% 100%, 0 calc(100% - var(--sesgo-abajo)));
+
+    &--rojo {
+        background-color: w.$rojo;
+    }
+
+    // Sin espacio superior: continúa la sección anterior del mismo fondo.
+    &--pegada {
+        padding-top: var(--sesgo-arriba);
+    }
+
+    &--sesgoArriba {
+        --sesgo-arriba: #{$sesgo};
+    }
+
+    &--sesgoAbajo {
+        --sesgo-abajo: #{$sesgo};
+    }
+
+    &__contenido {
+        width: min(100% - 2 * c.$padMin, 1320px);
+        display: flex;
+        flex-direction: column;
+        gap: clamp(2rem, 4vw, 3rem);
+    }
+
+    &__cabecera {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+
+        &--centrado {
+            align-items: center;
+            text-align: center;
+        }
+
+        &--accion {
+            @media only screen and (min-width: c.$tablet) {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: space-between;
+                align-items: flex-end;
+            }
+        }
+    }
+
+    &__grupo {
+        display: flex;
+        flex-direction: column;
+        align-items: inherit;
+        gap: 1rem;
+    }
+
+    &__titulo {
+        width: auto;
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.9rem, 4.6vw, 3.4rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1.08;
+        text-align: inherit;
+        text-transform: uppercase;
+    }
+
+    // Título largo de una sola línea en escritorio.
+    &__titulo--menor {
+        font-size: clamp(1.6rem, 3.4vw, 2.5rem);
+    }
+
+    // H2 necesario para la jerarquía pero sin título visible en el diseño:
+    // queda oculto en pantalla y accesible para lectores y buscadores.
+    &__titulo--oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    &__texto {
+        max-width: 46ch;
+        color: w.$cremaApagado;
+        font-family: w.$fuenteTexto;
+        line-height: 1.6;
+    }
+
+    &--rojo &__titulo {
+        color: w.$tinta;
+    }
+
+    &--rojo &__texto {
+        color: w.$tinta;
+    }
+
+    // Las tarjetas ocupan todo el ancho de su columna.
+    &__rejilla {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr));
+        gap: 1.25rem;
+
+        > * {
+            max-width: none;
+            margin: 0;
+        }
+    }
+
+    // Tarjetas de ancho fijo en filas centradas: la última fila incompleta
+    // queda centrada en lugar de alineada a la izquierda.
+    &__mosaico {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 2.5rem 1.5rem;
+
+        > * {
+            flex: 0 1 25rem;
+        }
+    }
+
+    &__dividido {
+        display: grid;
+        align-items: center;
+        gap: 3rem;
+
+        @media only screen and (min-width: c.$desktop) {
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+        }
+    }
+
+    // Columna principal más ancha y alineada arriba (formulario + tarjetas).
+    &__dividido--asimetrico {
+        align-items: start;
+
+        @media only screen and (min-width: c.$desktop) {
+            grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+            gap: 2.5rem;
+        }
+    }
+
+    &__columna {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+
+        // Los hijos ocupan todo el ancho de la columna.
+        &--estirada {
+            align-items: stretch;
+        }
+    }
+}

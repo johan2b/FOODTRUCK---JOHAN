@@ -1,0 +1,86 @@
+@use "sass:list";
+@use "sass:math";
+
+// moduloGrupo01
+// Grupo de siluetas sobre un lienzo de 150 x 80. Cada persona dibuja su
+// cabeza con ::before y su cuerpo con ::after; el sombrero de copa es una
+// capa aparte. Las proporciones de cada persona se definen en $personas.
+
+$lienzoAncho: 150;
+$lienzoAlto: 80;
+
+$silueta: #111;
+
+// Coloca una capa a partir de sus coordenadas en el lienzo (x1, y1) - (x2, y2).
+@mixin capa($x1, $y1, $x2, $y2) {
+    left: math.percentage(math.div($x1, $lienzoAncho));
+    top: math.percentage(math.div($y1, $lienzoAlto));
+    width: math.percentage(math.div($x2 - $x1, $lienzoAncho));
+    height: math.percentage(math.div($y2 - $y1, $lienzoAlto));
+}
+
+// nombre: (x1 y1 x2 y2, ancho de la cabeza, alto del cuerpo)
+$personas: (
+    1: (3 18 29 80, 61.5%, 69%),
+    2: (37 26 61 80, 66.7%, 66.7%),
+    3: (64 12 94 80, 53%, 70.6%),
+    4: (94 44 112 80, 66.7%, 61%),
+    5: (115 22 145 80, 60%, 65.5%),
+);
+
+.moduloGrupo01 {
+    position: relative;
+    width: 100%;
+    max-width: 150px;
+    aspect-ratio: #{$lienzoAncho} / #{$lienzoAlto};
+
+    > * {
+        position: absolute;
+    }
+
+    &__persona {
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            background-color: $silueta;
+            transform: translateX(-50%);
+        }
+
+        &::before {
+            top: 0;
+            width: var(--cabeza);
+            aspect-ratio: 1;
+            border-radius: 50%;
+        }
+
+        &::after {
+            bottom: 0;
+            width: 100%;
+            height: var(--cuerpo);
+            border-radius: 40% 40% 0 0 / 25% 25% 0 0;
+        }
+
+        @each $nombre, $datos in $personas {
+            $caja: list.nth($datos, 1);
+
+            &--#{$nombre} {
+                @include capa(list.nth($caja, 1), list.nth($caja, 2), list.nth($caja, 3), list.nth($caja, 4));
+                --cabeza: #{list.nth($datos, 2)};
+                --cuerpo: #{list.nth($datos, 3)};
+            }
+        }
+    }
+
+    // Sombrero de copa: copa estrecha arriba y ala ancha abajo.
+    &__sombrero {
+        @include capa(4, 8, 28, 19);
+        background-color: $silueta;
+        clip-path: polygon(25% 0, 75% 0, 75% 72%, 100% 72%, 100% 100%, 0 100%, 0 72%, 25% 72%);
+
+        &--alto {
+            @include capa(63, 0, 93, 11);
+        }
+    }
+}

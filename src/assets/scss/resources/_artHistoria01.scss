@@ -1,0 +1,356 @@
+@use "sass:math";
+@use "config" as c;
+@use "western" as w;
+
+// artHistoria01: historia en capítulos con una escena de desierto en la que el
+// food truck avanza hasta la hoguera, se abre y aparece el grupo de personas.
+//
+// - Por defecto (móvil, sin JS o con movimiento reducido): capítulos apilados y
+//   la escena en su estado final (camión abierto, grupo visible).
+// - .is-horizontal (lo añade _artHistoria01.js): la sección se queda fija y el
+//   scroll vertical, expresado en --progreso (0 a 1), desplaza los capítulos en
+//   horizontal y hace avanzar el camión. .is-llegada marca el final.
+//
+// Reutiliza moduloDesierto01, moduloFoodtruck01, moduloHoguera01 y moduloGrupo01.
+// Las posiciones de la escena son porcentajes de su ancho; el asfalto empieza
+// al 75,3 % de su alto (226 / 300 en moduloDesierto01).
+
+$capitulos: 3;
+$asfalto: 24.7%;
+$camionInicio: 3%;
+$camionFinal: 48%;
+$borde: #3b2b23;
+
+.artHistoria01 {
+    --progreso: 1;
+
+    display: block;
+    width: 100%;
+    padding: 0;
+
+    // H2 de la sección: necesario para la jerarquía, sin título visible.
+    &__oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+
+    &__fijo {
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+    }
+
+    &__visor {
+        overflow: hidden;
+    }
+
+    &__pista {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__capitulo {
+        border-top: 1px dashed $borde;
+        padding: clamp(2rem, 5vw, 3rem) c.$padMin clamp(2.5rem, 6vw, 4rem);
+    }
+
+    &__contenido {
+        width: min(100%, 70rem);
+        margin-inline: auto;
+        display: grid;
+        gap: 1.25rem 4rem;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-template-columns: 1fr 1fr;
+        }
+    }
+
+    &__barra {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+
+        @media only screen and (min-width: c.$tablet) {
+            grid-column: 1 / -1;
+        }
+    }
+
+    &__etiqueta {
+        padding: 0.35rem 0.7rem;
+        background-color: w.$rojo;
+        color: w.$crema;
+        font-family: w.$fuenteTexto;
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+    }
+
+    &__indice {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        color: #7d6f5c;
+        font-family: w.$fuenteTexto;
+        font-size: 0.68rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+
+        > span {
+            color: inherit;
+            font-family: inherit;
+        }
+
+        > .is-activo {
+            color: w.$rojo;
+        }
+    }
+
+    &__texto {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.9rem;
+    }
+
+    &__antetitulo {
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.25em;
+        text-transform: uppercase;
+    }
+
+    &__titulo {
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(2rem, 4vw, 2.8rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1;
+        text-transform: uppercase;
+    }
+
+    &__parrafo {
+        color: w.$cremaApagado;
+        font-family: w.$fuenteTexto;
+        line-height: 1.7;
+    }
+
+    &__lado {
+        align-self: center;
+    }
+
+    // Lista de eventos del capítulo III
+    &__eventos {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+        gap: 1rem 2rem;
+        list-style: none;
+
+        > li {
+            display: flex;
+            flex-direction: column;
+            gap: 0.15rem;
+            padding-left: 0.8rem;
+            border-left: 3px solid w.$rojo;
+        }
+    }
+
+    &__evento {
+        color: w.$crema;
+        font-family: w.$fuenteTexto;
+        font-weight: 700;
+    }
+
+    &__detalle {
+        color: w.$cremaApagado;
+        font-family: w.$fuenteTexto;
+        font-size: 0.85rem;
+    }
+
+    // Escena
+
+    // En móvil el paisaje se amplía y se recorta hacia el camión, la hoguera
+    // y el grupo (del 35 % al 95 % de la escena) para que no quede tan bajo.
+    &__escena {
+        position: relative;
+        width: 167%;
+        margin-left: -58%;
+
+        @media only screen and (min-width: c.$tablet) {
+            width: 100%;
+            margin-left: 0;
+        }
+    }
+
+    &__camion,
+    &__hoguera,
+    &__grupo {
+        position: absolute;
+        bottom: $asfalto;
+    }
+
+    // Las ruedas apoyan en el asfalto: 8 / 160 del alto del dibujo.
+    &__camion {
+        left: $camionFinal;
+        width: 20%;
+        aspect-ratio: 300 / 160;
+        transform: translateY(5%);
+    }
+
+    // Variantes cerrada y abierta superpuestas: se funden al llegar.
+    &__variante {
+        position: absolute;
+        inset: 0;
+        transition: opacity 400ms ease;
+
+        &--cerrado {
+            opacity: 0;
+        }
+    }
+
+    &__hoguera {
+        left: 70%;
+        width: 7%;
+        transform: translateY(6.7%);
+
+        > .moduloHoguera01 {
+            max-width: none;
+        }
+    }
+
+    &__grupo {
+        left: 80%;
+        width: 10.4%;
+        transition:
+            opacity 500ms ease 200ms,
+            transform 500ms ease 200ms;
+
+        > .moduloGrupo01 {
+            max-width: none;
+        }
+    }
+
+    &__aviso {
+        display: none;
+    }
+
+    // Modo horizontal (escritorio con movimiento permitido y JS)
+
+    &.is-horizontal {
+        height: #{$capitulos * 100}vh;
+        height: #{$capitulos * 100}svh;
+
+        .artHistoria01__fijo {
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            height: 100svh;
+            justify-content: space-between;
+            overflow: hidden;
+        }
+
+        // El capítulo arriba; la escena queda al pie de la pantalla.
+        .artHistoria01__visor {
+            flex: 1 1 auto;
+            display: flex;
+            align-items: flex-start;
+            padding-top: clamp(1rem, 4vh, 3rem);
+        }
+
+        .artHistoria01__pista {
+            flex-direction: row;
+            // Sin encoger: la pista mide tantos anchos de pantalla como capítulos.
+            flex: 0 0 auto;
+            width: #{$capitulos * 100%};
+            transform: translateX(calc(var(--progreso) * #{math.div(-100% * ($capitulos - 1), $capitulos)}));
+            will-change: transform;
+        }
+
+        .artHistoria01__capitulo {
+            flex: 0 0 #{math.div(100%, $capitulos)};
+            border-top: 0;
+        }
+
+        // Altura de la escena limitada para que quepa con el capítulo.
+        .artHistoria01__escena {
+            flex: 0 0 auto;
+            width: min(100%, 45vh * 1440 / 300);
+            margin-inline: auto;
+            border-top: 1px dashed $borde;
+        }
+
+        .artHistoria01__camion {
+            left: calc(#{$camionInicio} + var(--progreso) * #{$camionFinal - $camionInicio});
+        }
+
+        .artHistoria01__aviso {
+            position: absolute;
+            left: 7%;
+            bottom: 3%;
+            display: block;
+            color: w.$cremaApagado;
+            font-family: w.$fuenteTexto;
+            font-size: 0.68rem;
+            font-weight: 600;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            transition: opacity 300ms ease;
+        }
+
+        &:not(.is-llegada) {
+            .artHistoria01__variante--cerrado {
+                opacity: 1;
+            }
+
+            .artHistoria01__variante--abierto {
+                opacity: 0;
+            }
+
+            .artHistoria01__grupo {
+                opacity: 0;
+                transform: translateY(15%);
+            }
+        }
+
+        &.is-llegada .artHistoria01__aviso {
+            opacity: 0;
+        }
+    }
+}
+
+// Efectos: el camión vibra mientras rueda y el sol late detrás de la hoguera.
+@media (prefers-reduced-motion: no-preference) {
+    .artHistoria01.is-horizontal:not(.is-llegada) .artHistoria01__variante--cerrado {
+        animation: artHistoria01-motor 0.35s ease-in-out infinite alternate;
+    }
+
+    .artHistoria01 .moduloDesierto01__sol {
+        animation: artHistoria01-sol 6s ease-in-out infinite alternate;
+    }
+}
+
+@keyframes artHistoria01-motor {
+    to {
+        translate: 0 -1.5%;
+    }
+}
+
+@keyframes artHistoria01-sol {
+    to {
+        scale: 1.05;
+        filter: brightness(1.12);
+    }
+}

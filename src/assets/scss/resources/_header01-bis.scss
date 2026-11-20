@@ -1,0 +1,114 @@
+@use "config" as c;
+@use "western" as w;
+
+// header01-bis: variante western de header01. Conserva su estructura
+// (contenido con antetítulo, título, texto y llamada a la acción) pero la
+// reparte en dos columnas: el contenido a la izquierda y __media a la derecha,
+// donde cabe un recurso como artCartel01. header01 no cambia.
+
+.header01-bis {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    isolation: isolate;
+    padding: clamp(3rem, 8vw, 6rem) c.$padMin clamp(4rem, 9vw, 7rem);
+    background:
+        radial-gradient(ellipse 45% 60% at 18% 45%, rgba(w.$rojo, 0.22), transparent 70%),
+        w.$fondo;
+
+    &__inner {
+        width: min(100%, 1320px);
+        margin-inline: auto;
+        display: grid;
+        align-items: center;
+        gap: 3.5rem;
+
+        @media only screen and (min-width: c.$desktop) {
+            grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+            gap: 4rem;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+    }
+
+    &__eyebrow {
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-size: 0.75rem;
+        font-weight: 700;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+
+        // El estilo global de span impone otro color.
+        > span {
+            color: inherit;
+        }
+    }
+
+    &__titulo {
+        width: auto;
+        margin: 0;
+        color: w.$crema;
+        font-family: w.$fuenteTitulo;
+        // Mínimo bajo para palabras largas (p. ej. "mendebaldeko") en móvil.
+        font-size: clamp(1.75rem, 7vw, 4.8rem);
+        font-weight: 400;
+        letter-spacing: 0.02em;
+        line-height: 1.02;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    // Palabra destacada dentro del título.
+    &__resalte {
+        color: w.$rojoClaro;
+        font-family: inherit;
+    }
+
+    &__text {
+        max-width: 52ch;
+        color: w.$cremaApagado;
+        font-family: w.$fuenteTexto;
+        font-size: 1.05rem;
+        line-height: 1.6;
+    }
+
+    &__acciones {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+        margin-top: 0.5rem;
+    }
+
+    &__media {
+        display: flex;
+        justify-content: center;
+        padding-block: 1rem;
+    }
+
+    // Una sola columna centrada, sin __media.
+    &--centrado {
+        padding-bottom: 1rem;
+
+        .header01-bis__inner {
+            grid-template-columns: 1fr;
+        }
+
+        .header01-bis__content {
+            align-items: center;
+            text-align: center;
+        }
+
+        .header01-bis__titulo {
+            max-width: 20ch;
+            // El mínimo permite que palabras largas como "hamburguesas" quepan a 360 px.
+            font-size: clamp(1.75rem, 8vw, 5.4rem);
+            text-align: center;
+        }
+    }
+}

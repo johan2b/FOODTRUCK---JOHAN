@@ -1,0 +1,271 @@
+@use "sass:list";
+@use "sass:math";
+@use "config" as c;
+
+// moduloBurger01
+// Ilustración de hamburguesa por capas. Cada ingrediente es un elemento del
+// dibujo y se posiciona sobre un lienzo de 300 x 250 con porcentajes, de modo
+// que el dibujo escala con el ancho del módulo. Las variantes se forman
+// combinando capas en el HTML; el orden del HTML decide qué capa queda encima.
+
+$lienzoAncho: 300;
+$lienzoAlto: 250;
+
+$pan: #c97a30;
+$panBrillo: #d98b3b;
+$sesamo: #fbe3b0;
+$sombra: #9e9e9e;
+$sombraOscura: #0b0806;
+$lechuga: #6f9a2c;
+$hoja: #8db53c;
+$tomate: #cc3a2b;
+$queso: #f2b632;
+$carne: #6b4a33;
+$carneParrilla: #3b1f15;
+$carneMarcas: #24110a;
+$cebolla: #f0e2d8;
+$aros: #e0a040;
+$huevo: #fbf1de;
+$yema: #f2a520;
+$barbacoa: #8f2a1f;
+$jalapeno: #3e6b1b;
+$jalapenoSemillas: #a5c652;
+$mostaza: #e9b23a;
+$salsaOscura: #5b2a18;
+$salsaPicante: #d4512a;
+
+// Coloca una capa a partir de sus coordenadas en el lienzo (x1, y1) - (x2, y2).
+@mixin capa($x1, $y1, $x2, $y2) {
+    left: math.percentage(math.div($x1, $lienzoAncho));
+    top: math.percentage(math.div($y1, $lienzoAlto));
+    width: math.percentage(math.div($x2 - $x1, $lienzoAncho));
+    height: math.percentage(math.div($y2 - $y1, $lienzoAlto));
+}
+
+// Semillas del pan: posición relativa al pan superior.
+$semillas: (20.7% 57.5%, 28.3% 30%, 38% 50%, 44.6% 17.5%, 47.8% 67.5%, 55.4% 42.5%, 62% 21%, 70.7% 55%, 77% 35%, 84.8% 62.5%);
+
+@function semillas() {
+    $capas: ();
+    @each $x, $y in $semillas {
+        $capas: list.append($capas, radial-gradient(ellipse 2.8% 3.2% at $x $y, $sesamo 95%, transparent 100%), comma);
+    }
+    @return $capas;
+}
+
+.moduloBurger01-lista {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+    width: 100%;
+    max-width: c.$desktop;
+    gap: c.$padMin;
+    padding: c.$padMin;
+    list-style: none;
+}
+
+.moduloBurger01 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 0.5rem;
+    width: 100%;
+    max-width: 300px;
+    margin-inline: auto;
+
+    &__dibujo {
+        position: relative;
+        width: 100%;
+        aspect-ratio: #{$lienzoAncho} / #{$lienzoAlto};
+
+        > * {
+            position: absolute;
+        }
+    }
+
+    &__nombre {
+        font-family: c.$fuenteTextos;
+        color: c.$color01;
+        letter-spacing: 2px;
+        text-align: center;
+    }
+
+    // Pan y sombra: comunes a todas las variantes
+
+    &__sombra {
+        @include capa(30, 236, 270, 250);
+        border-radius: 50%;
+        background-color: $sombra;
+    }
+
+    // Sobre fondos oscuros la sombra se oscurece en lugar de aclarar.
+    &--oscuro &__sombra {
+        background-color: $sombraOscura;
+    }
+
+    &__panInferior {
+        @include capa(56, 207, 244, 244);
+        border-radius: 4% 4% 10% 10% / 10% 10% 40% 40%;
+        background-color: $pan;
+    }
+
+    &__panSuperior {
+        @include capa(58, 38, 242, 118);
+        border-radius: 50% 50% 2% 2% / 100% 100% 4% 4%;
+        background-color: $pan;
+        overflow: hidden;
+
+        // brillo interior
+        &::before {
+            content: "";
+            position: absolute;
+            inset: 12% 6% 8%;
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+            background-color: $panBrillo;
+        }
+
+        // sésamo
+        &::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image: semillas();
+        }
+    }
+
+    // Verduras
+
+    &__lechuga {
+        @include capa(50, 125, 250, 140);
+        background:
+            radial-gradient(ellipse 50% 100% at 50% 100%, $lechuga 98%, transparent 100%) top / 10% 60% repeat-x,
+            linear-gradient($lechuga, $lechuga) bottom / 100% 45% no-repeat;
+    }
+
+    &__hoja {
+        @include capa(56, 144, 244, 162);
+        background:
+            radial-gradient(ellipse 50% 100% at 50% 100%, $hoja 98%, transparent 100%) top / 25% 40% repeat-x,
+            linear-gradient($hoja, $hoja) bottom / 100% 62% no-repeat;
+    }
+
+    &__tomate {
+        @include capa(64, 196, 236, 208);
+        border-radius: 999px;
+        background-color: $tomate;
+
+        &--alto {
+            @include capa(64, 150, 236, 162);
+        }
+    }
+
+    &__cebolla {
+        @include capa(62, 197, 238, 203);
+        border-radius: 999px;
+        background: repeating-linear-gradient(90deg, $cebolla 0 15%, c.$color00 15% 16%);
+    }
+
+    &__aros {
+        @include capa(60, 125, 240, 148);
+        background: radial-gradient(
+                ellipse closest-side,
+                transparent 52%,
+                $aros 56% 94%,
+                transparent 100%
+            )
+            0 0 / calc(100% / 3) 100% repeat-x;
+    }
+
+    &__jalapenos {
+        @include capa(72, 145, 228, 165);
+        background: radial-gradient(
+                circle closest-side,
+                $jalapenoSemillas 0 30%,
+                $jalapeno 34% 94%,
+                transparent 100%
+            )
+            0 0 / 20% 100% repeat-x;
+    }
+
+    // Queso, huevo y salsas
+
+    &__queso {
+        @include capa(50, 138, 250, 166);
+        background-color: $queso;
+        clip-path: polygon(
+            0 0,
+            100% 0,
+            97% 36%,
+            88% 36%,
+            84% 100%,
+            79% 36%,
+            56% 36%,
+            51% 100%,
+            46% 36%,
+            24% 36%,
+            19% 100%,
+            14% 36%,
+            3% 36%
+        );
+    }
+
+    &__huevo {
+        @include capa(60, 132, 240, 152);
+        border-radius: 50%;
+        background-color: $huevo;
+    }
+
+    &__yema {
+        @include capa(130, 129, 170, 147);
+        border-radius: 50% 50% 40% 40% / 100% 100% 30% 30%;
+        background-color: $yema;
+    }
+
+    &__barbacoa {
+        @include capa(44, 148, 256, 164);
+        background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 212 16' preserveAspectRatio='none'%3E%3Cpath d='M4 10 C 22 0 40 14 58 7 S 94 0 112 8 S 148 14 166 6 S 196 2 208 9' fill='none' stroke='%238f2a1f' stroke-width='7' stroke-linecap='round'/%3E%3C/svg%3E")
+            center / 100% 100% no-repeat;
+    }
+
+    &__salsa {
+        @include capa(56, 199, 244, 205);
+        border-radius: 999px;
+        background-color: $mostaza;
+
+        &--oscura {
+            background-color: $salsaOscura;
+        }
+
+        &--picante {
+            background-color: $salsaPicante;
+        }
+    }
+
+    // Carne
+
+    &__carne {
+        @include capa(54, 164, 246, 195);
+        border-radius: 8% / 50%;
+        background:
+            repeating-linear-gradient(90deg, $carneMarcas 0 4%, transparent 4% 7%) center 45% / 90% 10% no-repeat,
+            $carneParrilla;
+
+        &--cupula {
+            @include capa(56, 158, 244, 190);
+            border-radius: 40% 40% 0 0 / 100% 100% 0 0;
+            background: $carne;
+        }
+    }
+}
+
+// Efectos: al pasar el ratón la tapa salta, como si alguien fuera a morderla.
+@media (prefers-reduced-motion: no-preference) {
+    .moduloBurger01 {
+        &__panSuperior {
+            transition: translate 350ms cubic-bezier(0.3, 1.6, 0.5, 1);
+        }
+
+        &:hover &__panSuperior {
+            translate: 0 -9%;
+        }
+    }
+}

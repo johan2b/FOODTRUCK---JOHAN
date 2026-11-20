@@ -1,0 +1,66 @@
+@use "western" as w;
+
+// artCarta01
+// Tarjeta oscura de carta: ilustración con resplandor rojo, nombre del
+// producto, lema y precio. Admite cualquier dibujo en __imagen (por ejemplo,
+// moduloBurger01 con su modificador --oscuro).
+
+.artCarta01 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 1rem;
+    width: 100%;
+    max-width: 410px;
+    padding: 2rem 1.5rem 2.5rem;
+    border: 1px solid w.$fondoBorde;
+    background:
+        radial-gradient(circle at 50% 32%, rgba(w.$rojo, 0.38), transparent 42%),
+        w.$fondo;
+    text-align: center;
+
+    &__imagen {
+        width: 72%;
+    }
+
+    &__titulo {
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.35rem, 6vw, 1.6rem);
+        font-weight: 400;
+        letter-spacing: 0.04em;
+        line-height: 1.1;
+        color: w.$crema;
+        text-transform: uppercase;
+    }
+
+    &__lema {
+        font-family: w.$fuenteTexto;
+        font-size: 0.8rem;
+        font-weight: 600;
+        letter-spacing: 0.2em;
+        color: w.$cremaApagado;
+        text-transform: uppercase;
+    }
+
+    &__precio {
+        margin-top: 0.5rem;
+        font-family: w.$fuenteTitulo;
+        font-size: 2rem;
+        line-height: 1;
+        color: w.$rojoClaro;
+    }
+}
+
+// Efectos: la tarjeta se eleva y el borde se enciende al pasar el ratón.
+@media (prefers-reduced-motion: no-preference) {
+    .artCarta01 {
+        transition:
+            translate 300ms ease,
+            border-color 300ms ease;
+
+        &:hover {
+            translate: 0 -6px;
+            border-color: w.$rojo;
+        }
+    }
+}
