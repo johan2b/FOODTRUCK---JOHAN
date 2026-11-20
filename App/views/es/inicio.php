@@ -41,7 +41,7 @@
             <div class="header01-bis__inner">
                 <div class="header01-bis__content">
                     <p class="header01-bis__eyebrow">
-                        <span aria-hidden="true">★ </span>Foodtruck de hamburguesas<span aria-hidden="true"> ★</span>
+                        <span aria-hidden="true">★ </span>Foodtruck de hamburguesas neter de buevo el texto de orueba<span aria-hidden="true"> ★</span>
                     </p>
                     <h1 class="header01-bis__titulo">
                         Las burgers más <span class="header01-bis__resalte">buscadas</span> del oeste
