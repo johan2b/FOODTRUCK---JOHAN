@@ -5,7 +5,7 @@
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
         <link rel="canonical" href="<?= e(app_url("/es/servicio1")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/servicio1")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/servicio1")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/zerbitzuak/zerbitzua1")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/servicio1")) ?>" />
         <title>Servicio 1 | Stack formación</title>
         <meta name="description" content="Lorem ipsum dolor sit amet" />

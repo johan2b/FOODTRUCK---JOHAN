@@ -11,21 +11,21 @@
     </li>
 
     <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/eu/contacto") ?>" title="Lorem ipsum">
+        <a class="enlaces01__link" href="<?= url("/eu/kontaktua") ?>" title="Lorem ipsum">
             <img class="enlaces01__icon" src="<?= asset("assets/img/icons/email.svg") ?>" alt="" title="" aria-hidden="true" />
             <span>Kontaktua</span>
         </a>
     </li>
 
     <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/eu/quienessomos") ?>" title="Lorem ipsum">
+        <a class="enlaces01__link" href="<?= url("/eu/nortzuk-gara") ?>" title="Lorem ipsum">
             <img class="enlaces01__icon" src="<?= asset("assets/img/icons/persons.svg") ?>" alt="" title="" aria-hidden="true" />
             <span>Nortzuk gara</span>
         </a>
     </li>
 
     <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/eu/preguntas-frecuentes") ?>" title="Lorem ipsum">
+        <a class="enlaces01__link" href="<?= url("/eu/ohiko-galderak") ?>" title="Lorem ipsum">
             <img class="enlaces01__icon" src="<?= asset("assets/img/icons/persons.svg") ?>" alt="" title="" aria-hidden="true" />
             <span>FAQ</span>
         </a>
@@ -55,13 +55,13 @@
 
         <ul class="enlaces01__submenu" id="<?= e($idSubmenu) ?>" data-nav01-submenu>
             <li class="enlaces01__item">
-                <a class="enlaces01__link enlaces01__link--child" href="<?= url("/eu/servicio1") ?>" title="Lorem ipsum">
+                <a class="enlaces01__link enlaces01__link--child" href="<?= url("/eu/zerbitzuak/zerbitzua1") ?>" title="Lorem ipsum">
                     <img class="enlaces01__icon" src="<?= asset("assets/img/icons/grid.svg") ?>" alt="" title="" aria-hidden="true" />
                     <span>1. zerbitzua</span>
                 </a>
             </li>
             <li class="enlaces01__item">
-                <a class="enlaces01__link enlaces01__link--child" href="<?= url("/eu/servicio2") ?>" title="Lorem ipsum">
+                <a class="enlaces01__link enlaces01__link--child" href="<?= url("/eu/zerbitzuak/zerbitzua2") ?>" title="Lorem ipsum">
                     <img class="enlaces01__icon" src="<?= asset("assets/img/icons/boxes.svg") ?>" alt="" title="" aria-hidden="true" />
                     <span>2. zerbitzua</span>
                 </a>

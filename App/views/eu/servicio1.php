@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
-        <link rel="canonical" href="<?= e(app_url("/eu/servicio1")) ?>" />
+        <link rel="canonical" href="<?= e(app_url("/eu/zerbitzuak/zerbitzua1")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/servicio1")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/servicio1")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/zerbitzuak/zerbitzua1")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/servicio1")) ?>" />
         <title>1. zerbitzua | Stack formación</title>
         <meta name="description" content="Lorem ipsum dolor sit amet" />
@@ -15,7 +15,7 @@
         <meta property="og:site_name" content="Lorem ipsum dolor sit amet" />
         <meta property="og:title" content="Lorem ipsum dolor sit amet" />
         <meta property="og:description" content="Lorem ipsum dolor sit amet" />
-        <meta property="og:url" content="<?= e(app_url("/eu/servicio1")) ?>" />
+        <meta property="og:url" content="<?= e(app_url("/eu/zerbitzuak/zerbitzua1")) ?>" />
         <meta property="og:image" content="<?= e(app_url("assets/img/views/matrix-3.webp")) ?>" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Lorem ipsum dolor sit amet" />
@@ -56,7 +56,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua.
                 </p>
-                <a href="<?= url("/eu/contacto") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
+                <a href="<?= url("/eu/kontaktua") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
             </div>
         </header>
 
@@ -220,7 +220,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua.
                         </p>
-                        <a href="<?= url("/eu/contacto") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
+                        <a href="<?= url("/eu/kontaktua") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
                     </div>
                     <div>
                         <img

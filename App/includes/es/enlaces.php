@@ -18,7 +18,7 @@
     </li>
 
     <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/es/quienessomos") ?>" title="Lorem ipsum">
+        <a class="enlaces01__link" href="<?= url("/es/quienes-somos") ?>" title="Lorem ipsum">
             <img class="enlaces01__icon" src="<?= asset("assets/img/icons/persons.svg") ?>" alt="" title="" aria-hidden="true" />
             <span>Quiénes somos</span>
         </a>

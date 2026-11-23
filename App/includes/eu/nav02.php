@@ -2,9 +2,9 @@
 // Navegación nav02 (euskera). La vista debe importar _nav02.scss y ejecutar nav02() desde su entrada.
 $nav02Enlaces = [
     "/eu" => "Hasiera",
-    "/eu/quienessomos" => "Nortzuk gara",
+    "/eu/nortzuk-gara" => "Nortzuk gara",
     "/eu/gure-hanburgesak" => "Gure hanburgesak",
-    "/eu/contacto" => "Kontaktua",
+    "/eu/kontaktua" => "Kontaktua",
     "/showroom" => "Showroom",
 ];
 ?>
@@ -71,7 +71,7 @@ $nav02Enlaces = [
                         >EU</a
                     >
                 </div>
-                <a class="nav02__cta" href="<?= url("/eu/contacto") ?>">Eskatu orain</a>
+                <a class="nav02__cta" href="<?= url("/eu/kontaktua") ?>">Eskatu orain</a>
             </div>
         </div>
     </div>

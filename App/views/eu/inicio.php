@@ -227,7 +227,7 @@
                             <p class="sect02-bis__texto">
                                 Egunero aldatzen dugu plaza. Begiratu ibilbidea eta etorri ogia amaitu baino lehen.
                             </p>
-                            <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/eu/contacto") ?>">Erreserbatu ekitaldi baterako</a>
+                            <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/eu/kontaktua") ?>">Erreserbatu ekitaldi baterako</a>
                         </div>
 
                         <article class="artRuta01" aria-labelledby="inicio-ruta-semana-eu">

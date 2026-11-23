@@ -42,7 +42,7 @@
             </p>
             <a
                 class="moduloBoton03 moduloCarrito01__pedir"
-                href="<?= url("/eu/contacto") ?>?pedido=llevar#contacto-telegrama-eu"
+                href="<?= url("/eu/kontaktua") ?>?pedido=llevar#contacto-telegrama-eu"
                 data-carrito-pedir
                 >Egin eramateko eskaera</a
             >

@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
-        <link rel="canonical" href="<?= e(app_url("/eu/quienessomos")) ?>" />
+        <link rel="canonical" href="<?= e(app_url("/eu/nortzuk-gara")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/quienes-somos")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/quienessomos")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/nortzuk-gara")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/quienes-somos")) ?>" />
         <title>Nortzuk gara | El Forajido hanburgesa-foodtruckaren historia</title>
         <meta
@@ -21,7 +21,7 @@
             property="og:description"
             content="1972ko Citroën HY furgoneta batetik 60.000 km baino gehiagoko errepide eta jaialdietara: El Forajidoren historia, txingarretako hanburgesen foodtrucka."
         />
-        <meta property="og:url" content="<?= e(app_url("/eu/quienessomos")) ?>" />
+        <meta property="og:url" content="<?= e(app_url("/eu/nortzuk-gara")) ?>" />
         <meta property="og:image" content="<?= e(app_url("assets/img/views/matrix-1.webp")) ?>" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Nortzuk gara | El Forajido hanburgesa-foodtruckaren historia" />

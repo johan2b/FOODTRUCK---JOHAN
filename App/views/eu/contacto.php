@@ -3,9 +3,9 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
-        <link rel="canonical" href="<?= e(app_url("/eu/contacto")) ?>" />
+        <link rel="canonical" href="<?= e(app_url("/eu/kontaktua")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/contacto")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/contacto")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/kontaktua")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/contacto")) ?>" />
         <title>Kontaktua eta ekitaldietarako erreserbak | El Forajido</title>
         <meta
@@ -21,7 +21,7 @@
             property="og:description"
             content="Idatzi iezaguzu foodtrucka ezkontza, jaialdi edo enpresa-ekitaldietarako erreserbatzeko, 40 pertsonatik gorako menu itxiarekin. Begiratu asteko ibilbidea ere."
         />
-        <meta property="og:url" content="<?= e(app_url("/eu/contacto")) ?>" />
+        <meta property="og:url" content="<?= e(app_url("/eu/kontaktua")) ?>" />
         <meta property="og:image" content="<?= e(app_url("assets/img/views/matrix-1.webp")) ?>" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kontaktua eta ekitaldietarako erreserbak | El Forajido" />

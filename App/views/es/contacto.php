@@ -5,7 +5,7 @@
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
         <link rel="canonical" href="<?= e(app_url("/es/contacto")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/contacto")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/contacto")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/kontaktua")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/contacto")) ?>" />
         <title>Contacto y reservas para eventos | El Forajido Burger Wagon</title>
         <meta

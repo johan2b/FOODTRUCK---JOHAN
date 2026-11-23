@@ -64,11 +64,11 @@ Mantener esa terminal abierta. El comando arranca dos procesos:
 | Vista | Castellano | Euskera |
 | --- | --- | --- |
 | `inicio.php` | `/es` | `/eu` |
-| `quienessomos.php` | `/es/quienessomos` | `/eu/quienessomos` |
-| `contacto.php` | `/es/contacto` | `/eu/contacto` |
+| `quienessomos.php` | `/es/quienes-somos` | `/eu/nortzuk-gara` |
+| `contacto.php` | `/es/contacto` | `/eu/kontaktua` |
 | `servicios.php` | `/es/nuestras-hamburguesas` | `/eu/gure-hanburgesak` |
-| `servicio1.php` | `/es/servicio1` | `/eu/servicio1` |
-| `servicio2.php` | `/es/servicio2` | `/eu/servicio2` |
+| `servicio1.php` | `/es/servicio1` | `/eu/zerbitzuak/zerbitzua1` |
+| `servicio2.php` | `/es/servicio2` | `/eu/zerbitzuak/zerbitzua2` |
 
 La raíz `/` redirige al idioma por defecto. Además están `/showroom`, la vista técnica `404.php` en cada idioma y el endpoint POST `/app/artForm02`.
 

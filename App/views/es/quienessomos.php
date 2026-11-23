@@ -5,7 +5,7 @@
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
         <link rel="canonical" href="<?= e(app_url("/es/quienes-somos")) ?>" />
         <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/quienes-somos")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/quienessomos")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/nortzuk-gara")) ?>" />
         <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/quienes-somos")) ?>" />
         <title>Quiénes somos | La historia del foodtruck El Forajido</title>
         <meta
