@@ -29,3 +29,6 @@ dist-ssr
 .env
 dist
 
+
+# Documentación privada del rediseño (no subir)
+docs/rediseno-western/
