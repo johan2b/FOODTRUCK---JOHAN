@@ -33,3 +33,22 @@ $tintaSuave: #5a4a3c;
 $rojo: #b5241c;
 $rojoClaro: #c4271f;
 $rojoHover: #d12e24;
+
+// Grunge: máscara de ruido que "come" los bordes y deja huecos, como tinta
+// gastada. Se aplica al elemento entero (incluido su texto), así que se usa en
+// líneas, franjas y pseudoelementos decorativos, no en bloques con contenido.
+// Dos capas que se intersecan: motas finas y desgaste grande. $escala cambia
+// el tamaño del patrón (px de cada tesela).
+$grungeMotas: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.22' numOctaves='2' seed='7' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -20 0 0 0 14.4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+$grungeDesgaste: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.03' numOctaves='3' seed='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -16 0 0 0 11.8'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
+
+@mixin grunge($escala: 140px) {
+    -webkit-mask-image: $grungeMotas, $grungeDesgaste;
+    mask-image: $grungeMotas, $grungeDesgaste;
+    -webkit-mask-size: $escala $escala, ($escala * 2.15) ($escala * 2.15);
+    mask-size: $escala $escala, ($escala * 2.15) ($escala * 2.15);
+    -webkit-mask-repeat: repeat;
+    mask-repeat: repeat;
+    -webkit-mask-composite: source-in;
+    mask-composite: intersect;
+}

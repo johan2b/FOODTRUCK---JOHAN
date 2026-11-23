@@ -1,4 +1,5 @@
 @use "config" as c;
+@use "western" as w;
 
 // nav02: barra oscura de estilo "western" con logo circular, enlaces en
 // mayúsculas, botón de llamada a la acción y franja discontinua inferior.
@@ -27,7 +28,7 @@ $nav02Control: 2.75rem;
     width: 100%;
     background-color: $nav02Fondo;
 
-    // Línea roja continua y franja discontinua bajo la barra.
+    // Línea roja continua y franja discontinua bajo la barra, gastadas.
     &::after {
         content: "";
         display: block;
@@ -36,6 +37,7 @@ $nav02Control: 2.75rem;
         background:
             linear-gradient($nav02Fondo, $nav02Fondo) top / 100% 4px no-repeat,
             repeating-linear-gradient(90deg, $nav02Rojo 0 20px, transparent 20px 28px);
+        @include w.grunge(120px);
     }
 
     &__inner {

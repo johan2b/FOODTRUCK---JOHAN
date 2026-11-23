@@ -26,8 +26,9 @@
     &__raya {
         flex: 0 0 auto;
         width: clamp(1.25rem, 6vw, 3.5rem);
-        height: 2px;
+        height: 3px;
         background-color: currentColor;
+        @include w.grunge(70px);
     }
 
     &--oscuro {

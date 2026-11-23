@@ -45,6 +45,8 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         transform: rotate(-6deg);
+        // Sello de tinta gastado (afecta también a su texto, como un tampón).
+        @include w.grunge(110px);
     }
 
     // El <form> es flex: _artForm02.js le vuelve a poner display: flex al

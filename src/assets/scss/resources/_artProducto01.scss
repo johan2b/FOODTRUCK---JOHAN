@@ -13,9 +13,35 @@
     width: calc(100% - 10px);
     max-width: 400px;
     margin-inline-end: 10px;
-    border: 3px solid w.$tinta;
-    background-color: w.$crema;
-    box-shadow: 10px 10px 0 w.$rojo;
+    position: relative;
+    // Contexto propio: las capas con z-index: -1 quedan dentro de la tarjeta.
+    isolation: isolate;
+    // El borde visible lo dibuja ::after; este reserva su espacio.
+    border: 3px solid transparent;
+
+    // Sombra roja desplazada con bordes gastados. Es un pseudoelemento y no un
+    // box-shadow porque la máscara grunge no puede aplicarse solo a la sombra.
+    // ::before (sombra) y ::after (fondo y borde) se pintan en ese orden, por
+    // debajo del contenido.
+    &::before,
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -3px;
+        z-index: -1;
+        pointer-events: none;
+    }
+
+    &::before {
+        background-color: w.$rojo;
+        translate: 10px 10px;
+        @include w.grunge(150px);
+    }
+
+    &::after {
+        border: 3px solid w.$tinta;
+        background-color: w.$crema;
+    }
 
     &__cabecera {
         position: relative;
@@ -219,13 +245,18 @@
 // Efectos: la tarjeta se eleva y su sombra crece al pasar el ratón.
 @media (prefers-reduced-motion: no-preference) {
     .artProducto01 {
-        transition:
-            translate 300ms ease,
-            box-shadow 300ms ease;
+        transition: translate 300ms ease;
+
+        &::before {
+            transition: translate 300ms ease;
+        }
 
         &:hover {
             translate: 0 -6px;
-            box-shadow: 14px 16px 0 w.$rojo;
+
+            &::before {
+                translate: 14px 16px;
+            }
         }
     }
 }
