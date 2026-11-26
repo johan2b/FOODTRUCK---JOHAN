@@ -5,7 +5,6 @@ $nav02Enlaces = [
     "/eu/nortzuk-gara" => "Nortzuk gara",
     "/eu/gure-hanburgesak" => "Gure hanburgesak",
     "/eu/kontaktua" => "Kontaktua",
-    "/showroom" => "Showroom",
 ];
 ?>
 <nav class="nav02" aria-label="Nabigazio nagusia">

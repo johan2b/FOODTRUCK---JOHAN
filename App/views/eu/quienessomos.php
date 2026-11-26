@@ -62,7 +62,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-1-eu">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 1 · Jatorria</p>
+                                        <p class="artHistoria01__etiqueta">Jatorria</p>
                                         <p class="artHistoria01__indice">
                                             <span class="is-activo">★ 01 Jatorria</span>
                                             <span>02 Bidea</span>
@@ -91,7 +91,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-2-eu">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 2 · Bidea →</p>
+                                        <p class="artHistoria01__etiqueta">Bidea →</p>
                                         <p class="artHistoria01__indice">
                                             <span>01 Jatorria</span>
                                             <span class="is-activo">★ 02 Bidea</span>
@@ -119,7 +119,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-3-eu">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 3 · Ekitaldiak · Iritsiera</p>
+                                        <p class="artHistoria01__etiqueta">Ekitaldiak · Iritsiera</p>
                                         <p class="artHistoria01__indice">
                                             <span>01 Jatorria</span>
                                             <span>02 Bidea</span>

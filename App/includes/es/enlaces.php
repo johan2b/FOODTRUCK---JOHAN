@@ -69,10 +69,4 @@
         </ul>
     </li>
 
-    <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/showroom") ?>" title="Lorem ipsum">
-            <img class="enlaces01__icon" src="<?= asset("assets/img/icons/grid.svg") ?>" alt="" title="" aria-hidden="true" />
-            <span>Showroom</span>
-        </a>
-    </li>
 </ul>

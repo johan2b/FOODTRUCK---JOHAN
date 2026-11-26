@@ -5,7 +5,6 @@ $nav02Enlaces = [
     "/es/quienes-somos" => "Quiénes somos",
     "/es/nuestras-hamburguesas" => "Nuestras hamburguesas",
     "/es/contacto" => "Contacto",
-    "/showroom" => "Showroom",
 ];
 ?>
 <nav class="nav02" aria-label="Navegación principal">

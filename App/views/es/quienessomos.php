@@ -62,7 +62,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-1-es">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 1 · Origen</p>
+                                        <p class="artHistoria01__etiqueta">Origen</p>
                                         <p class="artHistoria01__indice">
                                             <span class="is-activo">★ 01 Origen</span>
                                             <span>02 El camino</span>
@@ -90,7 +90,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-2-es">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 2 · El camino →</p>
+                                        <p class="artHistoria01__etiqueta">El camino →</p>
                                         <p class="artHistoria01__indice">
                                             <span>01 Origen</span>
                                             <span class="is-activo">★ 02 El camino</span>
@@ -118,7 +118,7 @@
                             <article class="artHistoria01__capitulo" aria-labelledby="quienes-capitulo-3-es">
                                 <div class="artHistoria01__contenido">
                                     <div class="artHistoria01__barra" aria-hidden="true">
-                                        <p class="artHistoria01__etiqueta">Scroll 3 · Eventos · Llegada</p>
+                                        <p class="artHistoria01__etiqueta">Eventos · Llegada</p>
                                         <p class="artHistoria01__indice">
                                             <span>01 Origen</span>
                                             <span>02 El camino</span>

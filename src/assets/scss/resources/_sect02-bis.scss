@@ -17,36 +17,42 @@
 
 $sesgo: clamp(2.5rem, 4.5vw, 4.5rem);
 $espacio: clamp(4rem, 8vw, 6.5rem);
-// Inclinación de la diagonal: atan2($sesgo, 100vw). Se aplica el clamp a los
-// ángulos porque Chrome no admite atan2() sobre un clamp() que mezcla rem y vw.
-$sesgoAngulo: clamp(atan2(2.5rem, 100vw), atan2(4.5vw, 100vw), atan2(4.5rem, 100vw));
-// Media anchura de la franja gastada que recorre cada diagonal.
+// Anchura de la franja gastada que asoma por fuera de cada diagonal.
 $sucio: 0.75rem;
 
-// Franja del color de la sección centrada sobre la diagonal y girada con ella:
-// la máscara grunge la llena de huecos y el degradado la desvanece hacia
-// fuera, de modo que el borde queda sucio en lugar de un corte limpio.
-// $haciaFuera: lado de la franja que queda fuera de la sección (top o bottom).
-@mixin sect02-bis-sucio($haciaFuera) {
-    $fade: linear-gradient(to $haciaFuera, #000 30%, transparent);
+// Franja del color de la sección sobre la diagonal: la máscara grunge la llena
+// de huecos y el degradado la desvanece hacia fuera, de modo que el borde
+// queda sucio en lugar de un corte limpio.
+//
+// No se gira con rotate: Chrome calcula mal atan2() cuando mezcla rem y vw, y
+// la franja se separaba del fondo en pantallas anchas dejando una raya oscura.
+// En su lugar, la caja es el triángulo del fondo ampliado cuatro veces (misma
+// proporción y la diagonal sobre la misma recta; el margen deja sitio a la
+// franja también en las esquinas), así que su diagonal de esquina a esquina coincide
+// exactamente con la del fondo. Las paradas en longitud miden la distancia
+// perpendicular a esa diagonal (el 50 %). Hacia dentro la franja es maciza y
+// tapa el canto del fondo, para que no se vea ninguna costura.
+// $direccion: "to bottom right" (arriba) o "to top right" (abajo); en ambos
+// casos el lado de fuera queda al principio del degradado.
+@mixin sect02-bis-sucio($direccion) {
+    $fade: linear-gradient($direccion, transparent calc(50% - #{2 * $sucio}), #000 calc(50% - #{0.6 * $sucio}));
+    $base: linear-gradient($direccion, transparent calc(50% - #{$sucio}), #000 calc(50% - #{0.4 * $sucio}));
 
     content: "";
     position: absolute;
     z-index: -1;
-    left: 0;
-    width: calc(100% + 2rem);
-    height: 2 * $sucio;
+    left: -150%;
+    width: 400%;
     background-color: var(--sect02-bis-fondo);
-    transform-origin: 0 50%;
     pointer-events: none;
-    -webkit-mask-image: w.$grungeMotas, w.$grungeDesgaste, $fade;
-    mask-image: w.$grungeMotas, w.$grungeDesgaste, $fade;
-    -webkit-mask-size: 110px 110px, 236px 236px, 100% 100%;
-    mask-size: 110px 110px, 236px 236px, 100% 100%;
-    -webkit-mask-repeat: repeat, repeat, no-repeat;
-    mask-repeat: repeat, repeat, no-repeat;
-    -webkit-mask-composite: source-in, source-in;
-    mask-composite: intersect, intersect;
+    -webkit-mask-image: $base, w.$grungeMotas, w.$grungeDesgaste, $fade;
+    mask-image: $base, w.$grungeMotas, w.$grungeDesgaste, $fade;
+    -webkit-mask-size: 100% 100%, 110px 110px, 236px 236px, 100% 100%;
+    mask-size: 100% 100%, 110px 110px, 236px 236px, 100% 100%;
+    -webkit-mask-repeat: no-repeat, repeat, repeat, no-repeat;
+    mask-repeat: no-repeat, repeat, repeat, no-repeat;
+    -webkit-mask-composite: source-over, source-in, source-in;
+    mask-composite: add, intersect, intersect;
 }
 
 .sect02-bis {
@@ -59,7 +65,7 @@ $sucio: 0.75rem;
 
     position: relative;
     isolation: isolate;
-    // Recorta el sobrante horizontal de las franjas giradas sin cortar el
+    // Recorta el sobrante horizontal de las franjas sin cortar el
     // vertical, que debe asomar sobre las secciones vecinas.
     overflow-x: clip;
     padding: calc(#{$espacio} + var(--sesgo-arriba)) 0 calc(#{$espacio} + var(--sesgo-abajo));
@@ -98,9 +104,9 @@ $sucio: 0.75rem;
         --recorte-arriba: #{$sucio};
 
         &::before {
-            @include sect02-bis-sucio(top);
-            top: calc(var(--sesgo-arriba) - #{$sucio});
-            rotate: calc(-1 * #{$sesgoAngulo});
+            @include sect02-bis-sucio(to bottom right);
+            top: calc(var(--recorte-arriba) - 1.5 * var(--sesgo-arriba));
+            height: calc(4 * var(--sesgo-arriba));
         }
     }
 
@@ -109,9 +115,9 @@ $sucio: 0.75rem;
         --recorte-abajo: #{$sucio};
 
         &::after {
-            @include sect02-bis-sucio(bottom);
-            bottom: calc(var(--sesgo-abajo) - #{$sucio});
-            rotate: $sesgoAngulo;
+            @include sect02-bis-sucio(to top right);
+            bottom: calc(var(--recorte-abajo) - 1.5 * var(--sesgo-abajo));
+            height: calc(4 * var(--sesgo-abajo));
         }
     }
 
