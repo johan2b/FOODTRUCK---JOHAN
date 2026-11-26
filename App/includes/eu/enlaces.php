@@ -11,7 +11,7 @@
     </li>
 
     <li class="enlaces01__item">
-        <a class="enlaces01__link" href="<?= url("/eu/kontaktua") ?>" title="Lorem ipsum">
+        <a class="enlaces01__link" href="<?= url("/eu/ekitaldiak") ?>" title="Lorem ipsum">
             <img class="enlaces01__icon" src="<?= asset("assets/img/icons/email.svg") ?>" alt="" title="" aria-hidden="true" />
             <span>Kontaktua</span>
         </a>

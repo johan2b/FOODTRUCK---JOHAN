@@ -56,7 +56,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua.
                 </p>
-                <a href="<?= url("/eu/kontaktua") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
+                <a href="<?= url("/eu/ekitaldiak") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
             </div>
         </header>
 
@@ -218,7 +218,7 @@
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
                             labore et dolore magna aliqua.
                         </p>
-                        <a href="<?= url("/eu/kontaktua") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
+                        <a href="<?= url("/eu/ekitaldiak") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
                     </div>
                     <div>
                         <img

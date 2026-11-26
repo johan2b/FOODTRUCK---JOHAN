@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
-        <link rel="canonical" href="<?= e(app_url("/eu/kontaktua")) ?>" />
-        <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/contacto")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/kontaktua")) ?>" />
-        <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/contacto")) ?>" />
+        <link rel="canonical" href="<?= e(app_url("/eu/ekitaldiak")) ?>" />
+        <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/eventos")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/ekitaldiak")) ?>" />
+        <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/eventos")) ?>" />
         <title>Kontaktua eta ekitaldietarako erreserbak | El Forajido</title>
         <meta
             name="description"
@@ -21,7 +21,7 @@
             property="og:description"
             content="Idatzi iezaguzu foodtrucka ezkontza, jaialdi edo enpresa-ekitaldietarako erreserbatzeko, 40 pertsonatik gorako menu itxiarekin. Begiratu asteko ibilbidea ere."
         />
-        <meta property="og:url" content="<?= e(app_url("/eu/kontaktua")) ?>" />
+        <meta property="og:url" content="<?= e(app_url("/eu/ekitaldiak")) ?>" />
         <meta property="og:image" content="<?= e(app_url("assets/img/views/matrix-1.webp")) ?>" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Kontaktua eta ekitaldietarako erreserbak | El Forajido" />
@@ -141,10 +141,6 @@
                                                 <input type="radio" name="motivo" value="otro" />
                                                 <span>Beste bat</span>
                                             </label>
-                                            <label class="artForm02-bis__chip">
-                                                <input type="radio" name="motivo" value="llevar" />
-                                                <span>Eramateko</span>
-                                            </label>
                                         </div>
                                     </fieldset>
 
@@ -173,7 +169,9 @@
 
                                 <div class="artForm02-bis__linea">
                                     <input type="checkbox" name="terminos" id="terminosAjax" required />
-                                    <label for="terminosAjax">Onartzen dut nire datuak telegrama honi erantzuteko erabiltzea</label>
+                                    <label for="terminosAjax"
+                                        >Onartzen dut nire datuak telegrama honi erantzuteko erabiltzea, <a href="<?= url("/eu/pribatutasun-politika") ?>" target="_blank" rel="noopener">pribatutasun-politikaren<span class="artForm02-bis__oculto"> (fitxa berri batean irekitzen da)</span></a> arabera</label
+                                    >
                                 </div>
 
                                 <div class="artForm02-bis__linea">
@@ -243,7 +241,7 @@
                                         <span class="artContacto01__icono" aria-hidden="true">☎</span>
                                         <p class="artContacto01__etiqueta">Telefonoa / WhatsApp</p>
                                         <p class="artContacto01__valor">
-                                            <a class="artContacto01__enlace" href="tel:+34612345678">+34 612 345 678</a>
+                                            <a class="artContacto01__enlace" href="tel:+34600000000">+34 600 000 000</a>
                                         </p>
                                     </li>
                                     <li class="artContacto01__item">

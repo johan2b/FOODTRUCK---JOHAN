@@ -65,10 +65,14 @@ Mantener esa terminal abierta. El comando arranca dos procesos:
 | --- | --- | --- |
 | `inicio.php` | `/es` | `/eu` |
 | `quienessomos.php` | `/es/quienes-somos` | `/eu/nortzuk-gara` |
-| `contacto.php` | `/es/contacto` | `/eu/kontaktua` |
+| `contacto.php` | `/es/eventos` | `/eu/ekitaldiak` |
+| `pedidos.php` | `/es/pedidos` | `/eu/eskaerak` |
 | `servicios.php` | `/es/nuestras-hamburguesas` | `/eu/gure-hanburgesak` |
 | `servicio1.php` | `/es/servicio1` | `/eu/zerbitzuak/zerbitzua1` |
 | `servicio2.php` | `/es/servicio2` | `/eu/zerbitzuak/zerbitzua2` |
+| `avisolegal.php` | `/es/aviso-legal` | `/eu/lege-oharra` |
+| `privacidad.php` | `/es/politica-de-privacidad` | `/eu/pribatutasun-politika` |
+| `cookies.php` | `/es/gestion-de-cookies` | `/eu/cookieen-kudeaketa` |
 
 La raíz `/` redirige al idioma por defecto. Además están `/showroom`, la vista técnica `404.php` en cada idioma y el endpoint POST `/app/artForm02`.
 

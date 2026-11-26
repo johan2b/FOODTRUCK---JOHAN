@@ -33,7 +33,7 @@
             <div class="footer02__col">
                 <h2 class="footer02__title">Kontaktua</h2>
                 <address class="footer02__address">
-                    <a class="footer02__link footer02__line" href="tel:+34612345678">+34 612 345 678</a>
+                    <a class="footer02__link footer02__line" href="tel:+34600000000">+34 600 000 000</a>
                     <a class="footer02__link footer02__line" href="mailto:hola@elforajido.es">hola@elforajido.es</a>
                 </address>
             </div>
@@ -51,6 +51,23 @@
 
         <div class="footer02__bottom">
             <p class="footer02__legal">© <?= e(date("Y")) ?> El Forajido Burger Wagon</p>
+            <ul class="footer02__legales" aria-label="Lege-informazioa">
+                <li>
+                    <a class="footer02__link" href="<?= url("/eu/cookieen-kudeaketa") ?>" target="_blank" rel="noopener"
+                        >Cookien kudeaketa<span class="footer02__oculto"> (fitxa berri batean irekitzen da)</span></a
+                    >
+                </li>
+                <li>
+                    <a class="footer02__link" href="<?= url("/eu/lege-oharra") ?>" target="_blank" rel="noopener"
+                        >Lege-oharra<span class="footer02__oculto"> (fitxa berri batean irekitzen da)</span></a
+                    >
+                </li>
+                <li>
+                    <a class="footer02__link" href="<?= url("/eu/pribatutasun-politika") ?>" target="_blank" rel="noopener"
+                        >Pribatutasun-politika<span class="footer02__oculto"> (fitxa berri batean irekitzen da)</span></a
+                    >
+                </li>
+            </ul>
             <p class="footer02__motto"><span aria-hidden="true">★ </span>Bilatzen da: gosea<span aria-hidden="true"> ★</span></p>
         </div>
     </div>

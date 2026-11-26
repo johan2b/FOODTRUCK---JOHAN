@@ -8,3 +8,13 @@ matrix-3.webp: https://frames.shotspot.pro/pub/UzMHgce_ZivcS1vFiycdFL.webp
 matrix-4.webp: https://frames.shotspot.pro/pub/i-M4h2dZnQFtszBw4RKKHq.webp
 matrix-5.webp: https://frames.shotspot.pro/pub/961vHr0822p67BLbF4S4YS.webp
 matrix-6.webp: https://frames.shotspot.pro/pub/uET2xqRt3X7OM2RdTCp091.webp
+
+Fotos de las hamburguesas de la carta (burgers/), Unsplash License:
+https://unsplash.com/license — uso libre, también comercial; la atribución no es obligatoria.
+Descargadas recortadas a 800 x 600 en WebP.
+
+burgers/forajido.webp: Ilya Mashkov — https://unsplash.com/photos/_qxbJUr9RqI
+burgers/sheriff.webp: amirali mirhashemian — https://unsplash.com/photos/sc5sTPMrVfk
+burgers/diligencia.webp: Manu Ros — https://unsplash.com/photos/HctOsrD_z_c
+burgers/fiebre.webp: amirali mirhashemian — https://unsplash.com/photos/7NYn7YfpaZo
+burgers/coyote.webp: Filip Mishevski — https://unsplash.com/photos/Hf5N0v05ff0

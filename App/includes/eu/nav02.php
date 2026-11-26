@@ -4,7 +4,8 @@ $nav02Enlaces = [
     "/eu" => "Hasiera",
     "/eu/nortzuk-gara" => "Nortzuk gara",
     "/eu/gure-hanburgesak" => "Gure hanburgesak",
-    "/eu/kontaktua" => "Kontaktua",
+    "/eu/ekitaldiak" => "Ekitaldiak",
+    "/eu/eskaerak" => "Eskaerak",
 ];
 ?>
 <nav class="nav02" aria-label="Nabigazio nagusia">
@@ -70,7 +71,7 @@ $nav02Enlaces = [
                         >EU</a
                     >
                 </div>
-                <a class="nav02__cta" href="<?= url("/eu/kontaktua") ?>">Eskatu orain</a>
+                <a class="nav02__cta" href="<?= url("/eu/eskaerak") ?>">Eskatu orain</a>
             </div>
         </div>
     </div>

@@ -57,6 +57,35 @@
         width: 80%;
     }
 
+    // Cabecera con foto (public/assets/img/views/burgers): la foto ocupa todo el
+    // ancho y el número y la etiqueta quedan encima, sobre una placa oscura.
+    &__cabecera--foto {
+        padding: 0;
+        background: w.$fondo;
+
+        .artProducto01__imagen {
+            width: 100%;
+        }
+
+        .artProducto01__numero {
+            z-index: 1;
+            padding: 0.35rem 0.6rem;
+            background-color: rgba(w.$fondo, 0.85);
+        }
+
+        .artProducto01__etiqueta {
+            z-index: 1;
+        }
+    }
+
+    &__foto {
+        display: block;
+        width: 100%;
+        height: auto;
+        aspect-ratio: 4 / 3;
+        object-fit: cover;
+    }
+
     &__numero {
         position: absolute;
         top: 1.1rem;

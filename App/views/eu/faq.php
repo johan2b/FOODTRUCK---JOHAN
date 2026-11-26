@@ -56,7 +56,7 @@
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore
                     et dolore magna aliqua.
                 </p>
-                <a href="<?= url("/es/contacto") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
+                <a href="<?= url("/es/eventos") ?>" class="boton" title="Lorem ipsum">Lorem ipsum dolor sit amet</a>
             </div>
         </header>
 
@@ -323,7 +323,7 @@
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?= url("/es/contacto") ?>" title="Lorem ipsum">
+                                    <a href="<?= url("/es/eventos") ?>" title="Lorem ipsum">
                                         <img src="<?= asset("assets/img/icons/location.svg") ?>" alt="" title="" aria-hidden="true" />
                                         <span>Lorem ipsum dolor sit amet</span>
                                     </a>

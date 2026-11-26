@@ -16,7 +16,7 @@
         </section>
         <section class="footer01__column">
             <h2 class="footer01__title">Contacto</h2>
-            <a class="footer01__link" href="<?= url("/es/contacto") ?>">Lorem ipsum</a>
+            <a class="footer01__link" href="<?= url("/es/eventos") ?>">Lorem ipsum</a>
         </section>
     </div>
     <div class="footer01__bottom">

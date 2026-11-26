@@ -1,5 +1,7 @@
 @use "config" as c;
 @use "western" as w;
+// Miniaturas de las líneas del carrito: el carrito está en varias vistas.
+@use "moduloBurger01";
 
 // moduloCarrito01: botón flotante con contador y panel lateral (<dialog>) con
 // las hamburguesas añadidas, sus cantidades y el total. Comportamiento en
@@ -152,11 +154,21 @@
 
     &__item {
         display: grid;
-        grid-template-columns: 1fr auto;
+        grid-template-columns: 4.5rem 1fr auto;
         align-items: center;
         gap: 0.6rem 1rem;
         padding: 1.1rem 0;
         border-bottom: 1px dashed w.$fondoBorde;
+    }
+
+    // Dibujo moduloBurger01 de la hamburguesa, a la izquierda de sus dos filas.
+    &__miniatura {
+        grid-row: span 2;
+        align-self: center;
+
+        .moduloBurger01 {
+            max-width: none;
+        }
     }
 
     &__nombre {

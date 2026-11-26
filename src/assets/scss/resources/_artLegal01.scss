@@ -1,0 +1,177 @@
+@use "config" as c;
+@use "western" as w;
+
+// artLegal01: documento de texto largo (aviso legal, privacidad, cookies) sobre
+// una hoja crema de estilo western. Cada apartado es un <section> con su H2;
+// admite párrafos, listas, tablas y enlaces sin clases propias dentro de él.
+//
+// Piezas:
+// - __fecha: línea de última actualización.
+// - __apartado: cada bloque temático (section con H2).
+// - __titulo: H2 del apartado. __subtitulo: H3 dentro de un apartado.
+// - __tabla: contenedor con desplazamiento horizontal para tablas anchas.
+// - __pendiente: dato que el titular debe completar antes de publicar.
+// - __oculto: texto solo para lectores de pantalla.
+
+.artLegal01 {
+    width: 100%;
+    max-width: 880px;
+    margin-inline: auto;
+    padding: clamp(1.75rem, 5vw, 3.5rem);
+    border: 3px solid w.$tinta;
+    background-color: w.$crema;
+    box-shadow: 10px 10px 0 w.$rojo;
+    color: w.$tinta;
+    font-family: w.$fuenteTexto;
+    font-size: 1rem;
+    line-height: 1.7;
+
+    &__fecha {
+        margin-bottom: 2rem;
+        padding-bottom: 1rem;
+        border-bottom: 2px solid w.$tinta;
+        color: w.$tintaSuave;
+        font-family: w.$fuenteCursiva;
+        font-style: italic;
+    }
+
+    // Es un <section>: anula el relleno, el centrado y los huecos que la regla
+    // global de section (_config.scss) da a las secciones de página.
+    &__apartado {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.9rem;
+        max-width: none;
+        padding: 0;
+
+        @media only screen and (min-width: c.$tablet) {
+            padding: 0;
+            row-gap: 0.9rem;
+        }
+
+        @media only screen and (min-width: c.$desktop) {
+            padding: 0;
+            row-gap: 0.9rem;
+        }
+
+        & + & {
+            margin-top: 2.25rem;
+        }
+    }
+
+    &__titulo {
+        width: auto;
+        margin: 0;
+        color: w.$tinta;
+        font-family: w.$fuenteTitulo;
+        font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+        font-weight: 400;
+        line-height: 1.2;
+        text-align: left;
+        text-transform: uppercase;
+    }
+
+    &__subtitulo {
+        margin: 0.6rem 0 0;
+        color: w.$rojo;
+        font-family: w.$fuenteTexto;
+        font-size: 1rem;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+    }
+
+    p,
+    li,
+    td,
+    th {
+        color: w.$tinta;
+        font-family: inherit;
+        font-size: inherit;
+        line-height: inherit;
+    }
+
+    ul,
+    ol {
+        display: flex;
+        flex-direction: column;
+        gap: 0.35rem;
+        padding-left: 1.4rem;
+    }
+
+    ul {
+        list-style: square;
+    }
+
+    li::marker {
+        color: w.$rojo;
+    }
+
+    strong {
+        font-weight: 700;
+    }
+
+    a {
+        color: w.$rojo;
+        font: inherit;
+        text-decoration: underline;
+        text-underline-offset: 0.2em;
+        overflow-wrap: anywhere;
+
+        &:hover {
+            color: w.$rojoHover;
+        }
+
+        &:focus-visible {
+            outline: 2px solid w.$rojo;
+            outline-offset: 2px;
+        }
+    }
+
+    &__tabla {
+        width: 100%;
+        overflow-x: auto;
+
+        table {
+            width: 100%;
+            min-width: 560px;
+            border-collapse: collapse;
+            font-size: 0.92rem;
+        }
+
+        th,
+        td {
+            padding: 0.6rem 0.75rem;
+            border: 1px solid w.$tintaSuave;
+            text-align: left;
+            vertical-align: top;
+        }
+
+        th {
+            background-color: w.$tinta;
+            color: w.$crema;
+            font-weight: 700;
+        }
+    }
+
+    // Es un span: el estilo global de span impone otro color y otra fuente.
+    &__pendiente {
+        padding: 0 0.3em;
+        background-color: rgba(w.$rojo, 0.15);
+        color: w.$tinta;
+        font: inherit;
+        font-weight: 700;
+    }
+
+    // Texto solo para lectores de pantalla (aviso de pestaña nueva).
+    &__oculto {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+    }
+}

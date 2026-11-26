@@ -2,7 +2,9 @@
 // - Escucha los botones [data-carrito-anadir] (con data-carrito-id, -nombre y -precio).
 // - Guarda las líneas en localStorage para conservarlas entre páginas y pestañas.
 // - Panel <dialog> con cantidades (+, −, eliminar) y total.
-// - En contacto (?pedido=llevar) marca el motivo "llevar", rellena el campo oculto
+// - Cada línea muestra la miniatura de su hamburguesa clonando <template data-carrito-dibujo="id">.
+// - En el formulario de pedidos ([data-carrito-pedido], o ?pedido=llevar en eventos)
+//   marca el motivo "llevar" si existe, rellena el campo oculto
 //   "pedido" y muestra el resumen. El servidor recalcula los precios con
 //   App/config/carta.php: el precio del navegador solo sirve para mostrarlo.
 
@@ -70,11 +72,12 @@ export function moduloCarrito01(root = document) {
     const unidades = () => lineas.reduce((suma, l) => suma + l.cantidad, 0);
     const importe = () => lineas.reduce((suma, l) => suma + l.precio * l.cantidad, 0);
 
-    // Formulario de contacto (solo existe en esa vista)
+    // Formulario de pedidos o de eventos (solo existe en esas vistas)
     const formulario = document.querySelector("#idForAjax");
     const campoPedido = formulario?.querySelector('[name="pedido"]');
     const resumen = formulario?.querySelector("[data-carrito-resumen]");
-    const esPedido = new URLSearchParams(window.location.search).get("pedido") === "llevar";
+    const esPedido =
+        formulario?.hasAttribute("data-carrito-pedido") || new URLSearchParams(window.location.search).get("pedido") === "llevar";
 
     const pintarResumen = () => {
         if (!formulario || !campoPedido || !resumen) {
@@ -114,6 +117,10 @@ export function moduloCarrito01(root = document) {
             ...lineas.map((linea) => {
                 const item = plantilla.content.firstElementChild.cloneNode(true);
                 item.dataset.id = linea.id;
+                const dibujo = carrito.querySelector(`[data-carrito-dibujo="${CSS.escape(linea.id)}"]`);
+                if (dibujo) {
+                    item.querySelector('[data-campo="miniatura"]').append(dibujo.content.cloneNode(true));
+                }
                 item.querySelector('[data-campo="nombre"]').textContent = linea.nombre;
                 item.querySelector('[data-campo="unitario"]').textContent = formato(linea.precio);
                 item.querySelector('[data-campo="cantidad"]').textContent = String(linea.cantidad);
@@ -241,7 +248,7 @@ export function moduloCarrito01(root = document) {
         }
     });
 
-    // Contacto: preparar el formulario como pedido para llevar
+    // Preparar el formulario como pedido para llevar
     if (formulario && esPedido && lineas.length > 0) {
         const motivo = formulario.querySelector('[name="motivo"][value="llevar"]');
         const mensaje = formulario.querySelector('[name="mensaje"]');

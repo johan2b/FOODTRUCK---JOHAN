@@ -35,7 +35,7 @@
                         </p>
                         <a href="<?= url("/es") ?>" class="boton" title="Volver al inicio de Stack">Volver al inicio</a>
                         <a href="<?= url("/es/nuestras-hamburguesas") ?>" class="boton" title="Ver los servicios de ejemplo">Ver servicios</a>
-                        <a href="<?= url("/es/contacto") ?>" class="boton" title="Contactar con Stack">Ir a contacto</a>
+                        <a href="<?= url("/es/eventos") ?>" class="boton" title="Contactar con Stack">Ir a contacto</a>
                     </div>
                     <div>
                         <img src="<?= asset("assets/img/views/matrix-1.webp") ?>" width="480" height="207" alt="Matrix" title="Matrix" decoding="async" />

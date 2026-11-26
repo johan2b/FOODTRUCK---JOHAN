@@ -15,6 +15,9 @@ $nombre = trim((string) ($_POST["nombre"] ?? ""));
 $telefono = trim((string) ($_POST["telefono"] ?? ""));
 $email = trim((string) ($_POST["email"] ?? ""));
 $mensaje = trim((string) ($_POST["mensaje"] ?? ""));
+// Formulario de pedidos (tipo=pedido): no pide correo ni fecha y, al no haber
+// correo, no se envía confirmación a la persona.
+$esPedido = (string) ($_POST["tipo"] ?? "") === "pedido";
 // Campos opcionales (formulario de contacto western): si no llegan, no se validan.
 $fechaEvento = trim((string) ($_POST["fecha_evento"] ?? ""));
 $motivo = trim((string) ($_POST["motivo"] ?? ""));
@@ -161,12 +164,18 @@ if (comprobarVacio($telefono)) {
     enviarRespuestaAsincrona($copy["telefono_vacio"], true, "telefono");
 }
 
-if (comprobarVacio($email)) {
-    enviarRespuestaAsincrona($copy["email_vacio"], true, "email");
-}
+if ($esPedido) {
+    // El pedido no pide correo ni fecha: si llegan, se descartan.
+    $email = "";
+    $fechaEvento = "";
+} else {
+    if (comprobarVacio($email)) {
+        enviarRespuestaAsincrona($copy["email_vacio"], true, "email");
+    }
 
-if (!comprobarEmailSintaxis($email)) {
-    enviarRespuestaAsincrona($copy["email_invalido"], true, "email");
+    if (!comprobarEmailSintaxis($email)) {
+        enviarRespuestaAsincrona($copy["email_invalido"], true, "email");
+    }
 }
 
 if (comprobarVacio($mensaje)) {
@@ -265,7 +274,7 @@ $valoresHtml = [
     "url" => e($url),
     "nombre" => e($nombre),
     "telefono" => e($telefono),
-    "email" => e($email),
+    "email" => $email === "" ? "—" : e($email),
     "mensaje" => nl2br(e($mensajeCompleto)),
     "fecha" => e($fecha),
 ];
@@ -326,36 +335,40 @@ if (!$correoAdminEnviado) {
     enviarRespuestaAsincrona($copy["correo_envio"], true, "envio");
 }
 
-// 5. Correo de confirmación a la persona que ha escrito.
-$correoEmisor = env("EMAIL_WEB", "");
-$nombreEmisor = "Stack formación";
-$correoDestinatario = $email;
-$nombreDestinatario = $nombreAsunto;
-$correoResponderA = env("EMAIL_ADMIN", env("EMAIL_WEB", ""));
-$nombreResponderA = "Stack formación";
-$asunto = sprintf($copy["usuario_asunto"], $nombreAsunto);
+// 5. Correo de confirmación a la persona que ha escrito (el pedido no lleva correo).
+$correoUsuarioEnviado = true;
 
-$vars = array_merge($varsComunes, [
-    "{web}" => $valoresHtml["web"],
-    "{url}" => $valoresHtml["url"],
-    "{asunto}" => e($asunto),
-    "{aviso}" => e($copy["usuario_aviso"]),
-    "{explicacion}" => e($copy["usuario_explicacion"]),
-    "{contexto}" => e($copy["usuario_contexto"]),
-    "{razon}" => e($copy["usuario_razon"]),
-    "{nombre}" => $valoresHtml["nombre"],
-    "{telefono}" => $valoresHtml["telefono"],
-    "{email}" => $valoresHtml["email"],
-    "{mensaje}" => $valoresHtml["mensaje"],
-    "{responder}" => e($copy["usuario_responder"]),
-    "{fecha}" => $valoresHtml["fecha"],
-]);
+if (!$esPedido) {
+    $correoEmisor = env("EMAIL_WEB", "");
+    $nombreEmisor = "Stack formación";
+    $correoDestinatario = $email;
+    $nombreDestinatario = $nombreAsunto;
+    $correoResponderA = env("EMAIL_ADMIN", env("EMAIL_WEB", ""));
+    $nombreResponderA = "Stack formación";
+    $asunto = sprintf($copy["usuario_asunto"], $nombreAsunto);
 
-$cuerpo = str_replace(array_keys($vars), array_values($vars), $html);
-$cuerpoTexto = sprintf($copy["usuario_texto"], $nombre, $telefono, $email, $mensajeCompleto, $fecha);
-include $basePath . "/App/app/envioPhpMailer.php";
-$correoUsuarioEnviado = $envioCorreoOk;
-$errorCorreoUsuario = $envioCorreoError;
+    $vars = array_merge($varsComunes, [
+        "{web}" => $valoresHtml["web"],
+        "{url}" => $valoresHtml["url"],
+        "{asunto}" => e($asunto),
+        "{aviso}" => e($copy["usuario_aviso"]),
+        "{explicacion}" => e($copy["usuario_explicacion"]),
+        "{contexto}" => e($copy["usuario_contexto"]),
+        "{razon}" => e($copy["usuario_razon"]),
+        "{nombre}" => $valoresHtml["nombre"],
+        "{telefono}" => $valoresHtml["telefono"],
+        "{email}" => $valoresHtml["email"],
+        "{mensaje}" => $valoresHtml["mensaje"],
+        "{responder}" => e($copy["usuario_responder"]),
+        "{fecha}" => $valoresHtml["fecha"],
+    ]);
+
+    $cuerpo = str_replace(array_keys($vars), array_values($vars), $html);
+    $cuerpoTexto = sprintf($copy["usuario_texto"], $nombre, $telefono, $email, $mensajeCompleto, $fecha);
+    include $basePath . "/App/app/envioPhpMailer.php";
+    $correoUsuarioEnviado = $envioCorreoOk;
+    $errorCorreoUsuario = $envioCorreoError;
+}
 
 // 6. Guardar la consulta si este proyecto tiene una BBDD configurada.
 $bbddHost = env("BBDD_HOST");

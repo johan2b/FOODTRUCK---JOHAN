@@ -1,0 +1,28 @@
+@use "./resources/config" as c;
+@use "./resources/global";
+@use "./resources/western" as w;
+
+// Navegación y pie
+@use "./resources/nav02";
+@use "./resources/footer02";
+
+// Cabecera
+@use "./resources/header01-bis";
+@use "./resources/h2Especial-bis";
+
+// Contenido: aviso legal, política de privacidad y gestión de cookies
+@use "./resources/sect02-bis";
+@use "./resources/artLegal01";
+
+// Módulos
+@use "./resources/moduloBoton03";
+
+// Carrito (botón flotante y panel)
+@use "./resources/moduloCarrito01";
+
+// Aparición al hacer scroll: el último, para que su transition gane mientras dura.
+@use "./resources/moduloAnimar01";
+
+body {
+    background-color: w.$fondo;
+}

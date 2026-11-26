@@ -3,10 +3,10 @@
     <head>
         <meta charset="UTF-8" />
         <link rel="icon" type="image/svg+xml" href="<?= asset("favicon.svg") ?>" />
-        <link rel="canonical" href="<?= e(app_url("/es/contacto")) ?>" />
-        <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/contacto")) ?>" />
-        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/kontaktua")) ?>" />
-        <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/contacto")) ?>" />
+        <link rel="canonical" href="<?= e(app_url("/es/eventos")) ?>" />
+        <link rel="alternate" hreflang="es" href="<?= e(app_url("/es/eventos")) ?>" />
+        <link rel="alternate" hreflang="eu" href="<?= e(app_url("/eu/ekitaldiak")) ?>" />
+        <link rel="alternate" hreflang="x-default" href="<?= e(app_url("/es/eventos")) ?>" />
         <title>Contacto y reservas para eventos | El Forajido Burger Wagon</title>
         <meta
             name="description"
@@ -21,7 +21,7 @@
             property="og:description"
             content="Escríbenos para reservar el foodtruck en bodas, festivales o eventos de empresa, con menú cerrado desde 40 personas. Consulta también la ruta de la semana."
         />
-        <meta property="og:url" content="<?= e(app_url("/es/contacto")) ?>" />
+        <meta property="og:url" content="<?= e(app_url("/es/eventos")) ?>" />
         <meta property="og:image" content="<?= e(app_url("assets/img/views/matrix-1.webp")) ?>" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Contacto y reservas para eventos | El Forajido Burger Wagon" />
@@ -141,10 +141,6 @@
                                                 <input type="radio" name="motivo" value="otro" />
                                                 <span>Otro</span>
                                             </label>
-                                            <label class="artForm02-bis__chip">
-                                                <input type="radio" name="motivo" value="llevar" />
-                                                <span>Para llevar</span>
-                                            </label>
                                         </div>
                                     </fieldset>
 
@@ -173,7 +169,9 @@
 
                                 <div class="artForm02-bis__linea">
                                     <input type="checkbox" name="terminos" id="terminosAjax" required />
-                                    <label for="terminosAjax">Acepto que se usen mis datos para responder a este telegrama</label>
+                                    <label for="terminosAjax"
+                                        >Acepto que se usen mis datos para responder a este telegrama, según la <a href="<?= url("/es/politica-de-privacidad") ?>" target="_blank" rel="noopener">política de privacidad<span class="artForm02-bis__oculto"> (se abre en una pestaña nueva)</span></a></label
+                                    >
                                 </div>
 
                                 <div class="artForm02-bis__linea">
@@ -243,7 +241,7 @@
                                         <span class="artContacto01__icono" aria-hidden="true">☎</span>
                                         <p class="artContacto01__etiqueta">Teléfono / WhatsApp</p>
                                         <p class="artContacto01__valor">
-                                            <a class="artContacto01__enlace" href="tel:+34612345678">+34 612 345 678</a>
+                                            <a class="artContacto01__enlace" href="tel:+34600000000">+34 600 000 000</a>
                                         </p>
                                     </li>
                                     <li class="artContacto01__item">

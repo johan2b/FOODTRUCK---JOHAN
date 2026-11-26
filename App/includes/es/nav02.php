@@ -4,7 +4,8 @@ $nav02Enlaces = [
     "/es" => "Inicio",
     "/es/quienes-somos" => "Quiénes somos",
     "/es/nuestras-hamburguesas" => "Nuestras hamburguesas",
-    "/es/contacto" => "Contacto",
+    "/es/eventos" => "Eventos",
+    "/es/pedidos" => "Pedidos",
 ];
 ?>
 <nav class="nav02" aria-label="Navegación principal">
@@ -70,7 +71,7 @@ $nav02Enlaces = [
                         >EU</a
                     >
                 </div>
-                <a class="nav02__cta" href="<?= url("/es/contacto") ?>">Pide ahora</a>
+                <a class="nav02__cta" href="<?= url("/es/pedidos") ?>">Pide ahora</a>
             </div>
         </div>
     </div>

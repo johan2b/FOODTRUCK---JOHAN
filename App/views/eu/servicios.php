@@ -2,8 +2,8 @@
 // Precios y nombres de App/config/carta.php: el controlador del pedido usa el mismo catálogo.
 $carta = require app_path("config/carta.php");
 $euros = fn(int $centimos): string => number_format($centimos / 100, 2, ",", ".") . " €";
-// Karta (euskera): cada hamburguesa se pinta con artProducto01. "capas" son las capas de
-// moduloBurger01 en orden de pintado (la última queda encima).
+// Karta (euskera): cada hamburguesa se pinta con artProducto01. Su foto está en
+// public/assets/img/views/burgers/<slug>.webp y "dibujo" es su texto alternativo.
 $hamburguesas = [
     [
         "slug" => "forajido",
@@ -15,7 +15,6 @@ $hamburguesas = [
         "precio" => $euros($carta["forajido"]["centimos"]),
         "valor" => number_format($carta["forajido"]["centimos"] / 100, 2, ".", ""),
         "dibujo" => "El Forajido hanburgesa: letxuga, gazta, tomatea, okela eta tipula",
-        "capas" => ["sombra", "panInferior", "cebolla", "carne", "tomate moduloBurger01__tomate--alto", "queso", "lechuga", "panSuperior"],
     ],
     [
         "slug" => "sheriff",
@@ -27,7 +26,6 @@ $hamburguesas = [
         "precio" => $euros($carta["sheriff"]["centimos"]),
         "valor" => number_format($carta["sheriff"]["centimos"] / 100, 2, ".", ""),
         "dibujo" => "Sheriff Picante hanburgesa: letxuga, gazta, jalapeñoak, okela eta saltsa pikantea",
-        "capas" => ["sombra", "panInferior", "salsa moduloBurger01__salsa--picante", "carne", "jalapenos", "queso", "lechuga", "panSuperior"],
     ],
     [
         "slug" => "diligencia",
@@ -39,7 +37,6 @@ $hamburguesas = [
         "precio" => $euros($carta["diligencia"]["centimos"]),
         "valor" => number_format($carta["diligencia"]["centimos"] / 100, 2, ".", ""),
         "dibujo" => "La Diligencia hanburgesa: tipula-eraztunak, barbakoa saltsa eta okela",
-        "capas" => ["sombra", "panInferior", "salsa moduloBurger01__salsa--oscura", "carne", "barbacoa", "aros", "panSuperior"],
     ],
     [
         "slug" => "fiebre",
@@ -51,7 +48,6 @@ $hamburguesas = [
         "precio" => $euros($carta["fiebre"]["centimos"]),
         "valor" => number_format($carta["fiebre"]["centimos"] / 100, 2, ".", ""),
         "dibujo" => "Fiebre del Oro hanburgesa: arrautza, cheddar gazta, okela eta ezti-ziape saltsa",
-        "capas" => ["sombra", "panInferior", "salsa", "carne", "huevo", "queso", "yema", "panSuperior"],
     ],
     [
         "slug" => "coyote",
@@ -63,7 +59,6 @@ $hamburguesas = [
         "precio" => $euros($carta["coyote"]["centimos"]),
         "valor" => number_format($carta["coyote"]["centimos"] / 100, 2, ".", ""),
         "dibujo" => "Coyote Verde hanburgesa begetarianoa: kimu berdeak, guacamolea, portobelloa eta tomatea",
-        "capas" => ["sombra", "panInferior", "tomate", "carne moduloBurger01__carne--cupula", "hoja", "lechuga", "panSuperior"],
     ],
 ];
 ?>
@@ -131,19 +126,21 @@ $hamburguesas = [
                         <?php foreach ($hamburguesas as $hamburguesa): ?>
                             <?php $tituloId = "servicios-burger-" . $hamburguesa["slug"] . "-eu"; ?>
                             <article class="artProducto01" aria-labelledby="<?= e($tituloId) ?>">
-                                <div class="artProducto01__cabecera">
+                                <div class="artProducto01__cabecera artProducto01__cabecera--foto">
                                     <p class="artProducto01__numero">Nº <?= e($hamburguesa["numero"]) ?></p>
                                     <?php if ($hamburguesa["etiqueta"] !== null): ?>
                                         <p class="artProducto01__etiqueta"><?= e($hamburguesa["etiqueta"]) ?></p>
                                     <?php endif; ?>
                                     <div class="artProducto01__imagen">
-                                        <div class="moduloBurger01 moduloBurger01--oscuro">
-                                            <div class="moduloBurger01__dibujo" role="img" aria-label="<?= e($hamburguesa["dibujo"]) ?>">
-                                                <?php foreach ($hamburguesa["capas"] as $capa): ?>
-                                                    <span class="moduloBurger01__<?= e($capa) ?>"></span>
-                                                <?php endforeach; ?>
-                                            </div>
-                                        </div>
+                                        <img
+                                            class="artProducto01__foto"
+                                            src="<?= asset("assets/img/views/burgers/" . $hamburguesa["slug"] . ".webp") ?>"
+                                            alt="<?= e($hamburguesa["dibujo"]) ?>"
+                                            width="800"
+                                            height="600"
+                                            loading="lazy"
+                                            decoding="async"
+                                        />
                                     </div>
                                 </div>
                                 <div class="artProducto01__cuerpo">

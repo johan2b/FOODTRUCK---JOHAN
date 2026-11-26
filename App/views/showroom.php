@@ -90,7 +90,7 @@
                                         <li><a class="nav02__link" href="<?= url("/es") ?>">Inicio</a></li>
                                         <li><a class="nav02__link" href="<?= url("/es/quienes-somos") ?>">Quiénes somos</a></li>
                                         <li><a class="nav02__link" href="<?= url("/es/nuestras-hamburguesas") ?>">Nuestras hamburguesas</a></li>
-                                        <li><a class="nav02__link" href="<?= url("/es/contacto") ?>">Contacto</a></li>
+                                        <li><a class="nav02__link" href="<?= url("/es/eventos") ?>">Contacto</a></li>
                                         <li><a class="nav02__link" href="<?= url("/showroom") ?>" aria-current="page">Showroom</a></li>
                                     </ul>
                                     <div class="nav02__langs" role="group" aria-label="Idioma">
@@ -112,7 +112,7 @@
                                             >EU</a
                                         >
                                     </div>
-                                    <a class="nav02__cta" href="<?= url("/es/contacto") ?>">Pide ahora</a>
+                                    <a class="nav02__cta" href="<?= url("/es/eventos") ?>">Pide ahora</a>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@
                             <div class="footer02__col">
                                 <h3 class="footer02__title">Contacto</h3>
                                 <address class="footer02__address">
-                                    <a class="footer02__link footer02__line" href="tel:+34612345678">+34 612 345 678</a>
+                                    <a class="footer02__link footer02__line" href="tel:+34600000000">+34 600 000 000</a>
                                     <a class="footer02__link footer02__line" href="mailto:hola@elforajido.es">hola@elforajido.es</a>
                                 </address>
                             </div>
@@ -173,6 +173,23 @@
 
                         <div class="footer02__bottom">
                             <p class="footer02__legal">© <?= e(date("Y")) ?> El Forajido Burger Wagon</p>
+                            <ul class="footer02__legales" aria-label="Información legal">
+                                <li>
+                                    <a class="footer02__link" href="<?= url("/es/gestion-de-cookies") ?>" target="_blank" rel="noopener"
+                                        >Gestión de cookies<span class="footer02__oculto"> (se abre en una pestaña nueva)</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="footer02__link" href="<?= url("/es/aviso-legal") ?>" target="_blank" rel="noopener"
+                                        >Aviso legal<span class="footer02__oculto"> (se abre en una pestaña nueva)</span></a
+                                    >
+                                </li>
+                                <li>
+                                    <a class="footer02__link" href="<?= url("/es/politica-de-privacidad") ?>" target="_blank" rel="noopener"
+                                        >Política de privacidad<span class="footer02__oculto"> (se abre en una pestaña nueva)</span></a
+                                    >
+                                </li>
+                            </ul>
                             <p class="footer02__motto"><span aria-hidden="true">★ </span>Se busca: hambre<span aria-hidden="true"> ★</span></p>
                         </div>
                     </div>
@@ -1435,7 +1452,7 @@
                     <a class="moduloBoton03 moduloBoton03--contorno" href="<?= url("/es/nuestras-hamburguesas") ?>">Ver la carta</a>
                 </div>
                 <div class="moduloBoton03-grupo moduloBoton03-grupo--rojo">
-                    <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/es/contacto") ?>">Reservar para un evento</a>
+                    <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/es/eventos") ?>">Reservar para un evento</a>
                 </div>
             </section>
 
@@ -1456,7 +1473,7 @@
                             </p>
                             <div class="header01-bis__acciones">
                                 <a class="moduloBoton03" href="<?= url("/es/nuestras-hamburguesas") ?>">Lorem ipsum</a>
-                                <a class="moduloBoton03 moduloBoton03--contorno" href="<?= url("/es/contacto") ?>">Lorem ipsum</a>
+                                <a class="moduloBoton03 moduloBoton03--contorno" href="<?= url("/es/eventos") ?>">Lorem ipsum</a>
                             </div>
                         </div>
 
@@ -1528,7 +1545,7 @@
                             </p>
                             <h2 id="showroom-sect02-bis-dividido-title" class="sect02-bis__titulo">sect02-bis · dividido y artRuta01</h2>
                             <p class="sect02-bis__texto">Matrix ipsum dolor sit amet, consectetur adipisicing elit.</p>
-                            <a class="moduloBoton03" href="<?= url("/es/contacto") ?>">Lorem ipsum</a>
+                            <a class="moduloBoton03" href="<?= url("/es/eventos") ?>">Lorem ipsum</a>
                         </div>
 
                         <article class="artRuta01" aria-labelledby="showroom-artRuta01-title">
@@ -1630,7 +1647,7 @@
                         <!--
                             Ejemplo visual sin envío: artForm02 ya usa en este catálogo los IDs que
                             necesita _artForm02.js (#idForAjax, #nombreAjax...). En una página real,
-                            artForm02-bis lleva esos mismos IDs y nombres (ver App/views/es/contacto.php).
+                            artForm02-bis lleva esos mismos IDs y nombres (ver App/views/es/eventos.php).
                         -->
                         <article class="artForm02-bis" aria-labelledby="showroom-telegrama-title">
                             <div class="artForm02-bis__cabecera">
@@ -1703,7 +1720,7 @@
                                     <li>Matrix ipsum</li>
                                     <li>Lorem ipsum</li>
                                 </ul>
-                                <a class="moduloBoton03 moduloBoton03--contorno" href="<?= url("/es/contacto") ?>">Lorem ipsum</a>
+                                <a class="moduloBoton03 moduloBoton03--contorno" href="<?= url("/es/eventos") ?>">Lorem ipsum</a>
                             </article>
                         </div>
                     </div>
@@ -1943,6 +1960,48 @@
 
                         <p class="artHistoria01__aviso" aria-hidden="true">→ Avanza con el scroll</p>
                     </div>
+                </div>
+            </section>
+            <section aria-labelledby="showroom-artLegal01-title">
+                <h2 id="showroom-artLegal01-title">Recurso artLegal01</h2>
+
+                <!-- artLegal01: texto legal largo. En las páginas legales cada apartado lleva H2; aquí, H3. -->
+                <div class="artLegal01">
+                    <p class="artLegal01__fecha">Última actualización: lorem ipsum</p>
+
+                    <section class="artLegal01__apartado" aria-labelledby="showroom-artLegal01-1">
+                        <h3 id="showroom-artLegal01-1" class="artLegal01__titulo">1. Lorem ipsum</h3>
+                        <p>
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Titular:
+                            <span class="artLegal01__pendiente">[Razón social]</span>.
+                        </p>
+                        <ul>
+                            <li>Matrix ipsum dolor sit amet.</li>
+                            <li>Neo ipsum <a href="#showroom-artLegal01-title">enlace de ejemplo</a>.</li>
+                        </ul>
+                    </section>
+
+                    <section class="artLegal01__apartado" aria-labelledby="showroom-artLegal01-2">
+                        <h3 id="showroom-artLegal01-2" class="artLegal01__titulo">2. Dolor sit amet</h3>
+                        <div class="artLegal01__tabla">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Nombre</th>
+                                        <th scope="col">Finalidad</th>
+                                        <th scope="col">Duración</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>lorem</td>
+                                        <td>Lorem ipsum dolor sit amet.</td>
+                                        <td>Sesión</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
                 </div>
             </section>
             <section aria-labelledby="showroom-animar-carrito-title">

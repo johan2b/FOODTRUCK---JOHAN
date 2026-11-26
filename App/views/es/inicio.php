@@ -227,7 +227,7 @@
                             <p class="sect02-bis__texto">
                                 Cambiamos de plaza cada día. Consulta la ruta y ven antes de que se acabe el pan.
                             </p>
-                            <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/es/contacto") ?>">Reservar para un evento</a>
+                            <a class="moduloBoton03 moduloBoton03--oscuro" href="<?= url("/es/eventos") ?>">Reservar para un evento</a>
                         </div>
 
                         <article class="artRuta01" aria-labelledby="inicio-ruta-semana-es">
