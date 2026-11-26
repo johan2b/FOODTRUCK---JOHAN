@@ -260,6 +260,14 @@ $borde: #3b2b23;
             height: 100svh;
             justify-content: space-between;
             overflow: hidden;
+
+            // Entre tablet y escritorio la escena es baja y al pie de la
+            // pantalla queda lejos del texto: capítulo y escena se agrupan
+            // centrados en vertical.
+            @media only screen and (max-width: #{c.$desktop - 1px}) {
+                justify-content: center;
+                gap: clamp(2rem, 6vh, 4rem);
+            }
         }
 
         // El capítulo arriba; la escena queda al pie de la pantalla.
@@ -268,6 +276,10 @@ $borde: #3b2b23;
             display: flex;
             align-items: flex-start;
             padding-top: clamp(1rem, 4vh, 3rem);
+
+            @media only screen and (max-width: #{c.$desktop - 1px}) {
+                flex: 0 1 auto;
+            }
         }
 
         .artHistoria01__pista {

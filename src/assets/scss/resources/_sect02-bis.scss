@@ -8,7 +8,8 @@
 //
 // Modificadores de la raíz:
 // - --rojo: fondo rojo (por defecto, oscuro).
-// - --sesgoArriba / --sesgoAbajo: borde superior o inferior en diagonal.
+// - --sesgoArriba / --sesgoAbajo: borde superior o inferior en diagonal, con
+//   el filo gastado (usan ::before y ::after respectivamente).
 // Piezas:
 // - __cabecera (--centrado, --accion), __grupo, __titulo, __texto
 // - __rejilla: tarjetas en columnas.
@@ -16,18 +17,68 @@
 
 $sesgo: clamp(2.5rem, 4.5vw, 4.5rem);
 $espacio: clamp(4rem, 8vw, 6.5rem);
+// Inclinación de la diagonal: atan2($sesgo, 100vw). Se aplica el clamp a los
+// ángulos porque Chrome no admite atan2() sobre un clamp() que mezcla rem y vw.
+$sesgoAngulo: clamp(atan2(2.5rem, 100vw), atan2(4.5vw, 100vw), atan2(4.5rem, 100vw));
+// Media anchura de la franja gastada que recorre cada diagonal.
+$sucio: 0.75rem;
+
+// Franja del color de la sección centrada sobre la diagonal y girada con ella:
+// la máscara grunge la llena de huecos y el degradado la desvanece hacia
+// fuera, de modo que el borde queda sucio en lugar de un corte limpio.
+// $haciaFuera: lado de la franja que queda fuera de la sección (top o bottom).
+@mixin sect02-bis-sucio($haciaFuera) {
+    $fade: linear-gradient(to $haciaFuera, #000 30%, transparent);
+
+    content: "";
+    position: absolute;
+    z-index: -1;
+    left: 0;
+    width: calc(100% + 2rem);
+    height: 2 * $sucio;
+    background-color: var(--sect02-bis-fondo);
+    transform-origin: 0 50%;
+    pointer-events: none;
+    -webkit-mask-image: w.$grungeMotas, w.$grungeDesgaste, $fade;
+    mask-image: w.$grungeMotas, w.$grungeDesgaste, $fade;
+    -webkit-mask-size: 110px 110px, 236px 236px, 100% 100%;
+    mask-size: 110px 110px, 236px 236px, 100% 100%;
+    -webkit-mask-repeat: repeat, repeat, no-repeat;
+    mask-repeat: repeat, repeat, no-repeat;
+    -webkit-mask-composite: source-in, source-in;
+    mask-composite: intersect, intersect;
+}
 
 .sect02-bis {
+    --sect02-bis-fondo: #{w.$fondo};
     --sesgo-arriba: 0px;
     --sesgo-abajo: 0px;
+    // El borde limpio se retira $sucio hacia dentro y la franja lo cubre.
+    --recorte-arriba: 0px;
+    --recorte-abajo: 0px;
 
     position: relative;
+    isolation: isolate;
+    // Recorta el sobrante horizontal de las franjas giradas sin cortar el
+    // vertical, que debe asomar sobre las secciones vecinas.
+    overflow-x: clip;
     padding: calc(#{$espacio} + var(--sesgo-arriba)) 0 calc(#{$espacio} + var(--sesgo-abajo));
-    background-color: w.$fondo;
-    clip-path: polygon(0 var(--sesgo-arriba), 100% 0, 100% 100%, 0 calc(100% - var(--sesgo-abajo)));
+    // Fondo en tres capas: triángulo superior, triángulo inferior y cuerpo
+    // (1px más alto por cada lado para que no quede una costura entre capas).
+    // Con "to bottom right" / "to top right" la línea del 50 % une las
+    // esquinas opuestas, así que el corte coincide con la diagonal.
+    background:
+        linear-gradient(to bottom right, transparent 50%, var(--sect02-bis-fondo) 50%)
+            left 0 top var(--recorte-arriba) / 100% var(--sesgo-arriba) no-repeat,
+        linear-gradient(to top right, transparent 50%, var(--sect02-bis-fondo) 50%)
+            left 0 bottom var(--recorte-abajo) / 100% var(--sesgo-abajo) no-repeat,
+        linear-gradient(var(--sect02-bis-fondo), var(--sect02-bis-fondo))
+            left 0 top calc(var(--recorte-arriba) + var(--sesgo-arriba) - 1px)
+            / 100% calc(100% + 2px - var(--recorte-arriba) - var(--sesgo-arriba) - var(--sesgo-abajo) - var(--recorte-abajo))
+            no-repeat;
 
     &--rojo {
-        background-color: w.$rojo;
+        --sect02-bis-fondo: #{w.$rojo};
     }
 
     // Sin espacio superior: continúa la sección anterior del mismo fondo.
@@ -35,12 +86,33 @@ $espacio: clamp(4rem, 8vw, 6.5rem);
         padding-top: var(--sesgo-arriba);
     }
 
+    // Las secciones con diagonal quedan por encima de sus vecinas para que la
+    // suciedad del borde se pinte sobre ellas.
+    &--sesgoArriba,
+    &--sesgoAbajo {
+        z-index: 1;
+    }
+
     &--sesgoArriba {
         --sesgo-arriba: #{$sesgo};
+        --recorte-arriba: #{$sucio};
+
+        &::before {
+            @include sect02-bis-sucio(top);
+            top: calc(var(--sesgo-arriba) - #{$sucio});
+            rotate: calc(-1 * #{$sesgoAngulo});
+        }
     }
 
     &--sesgoAbajo {
         --sesgo-abajo: #{$sesgo};
+        --recorte-abajo: #{$sucio};
+
+        &::after {
+            @include sect02-bis-sucio(bottom);
+            bottom: calc(var(--sesgo-abajo) - #{$sucio});
+            rotate: $sesgoAngulo;
+        }
     }
 
     &__contenido {
